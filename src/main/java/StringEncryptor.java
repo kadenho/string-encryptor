@@ -1,11 +1,11 @@
-package main.java;
+package java;
 
 import java.util.Scanner;
 
 public class StringEncryptor {
     public static final Scanner scanner = new Scanner(System.in);
 
-    private static String retrieveString(String prompt, Boolean alphabetOnly) {
+    public static String retrieveString(String prompt, Boolean alphabetOnly) {
         System.out.print(prompt);
         String retrievedEntry =  scanner.nextLine();
         if (retrievedEntry.isEmpty()){
@@ -21,7 +21,7 @@ public class StringEncryptor {
         }
     }
 
-    private static int retrieveInteger(String prompt) {
+    public static int retrieveInteger(String prompt) {
         System.out.print(prompt);
         try {
             return Integer.parseInt(scanner.nextLine());
@@ -31,7 +31,7 @@ public class StringEncryptor {
         }
     }
 
-    private static int retrieveInteger(String prompt, int lowerBound, int upperBound) {
+    public static int retrieveInteger(String prompt, int lowerBound, int upperBound) {
         System.out.print(prompt);
         int retrievedEntry;
         try {
@@ -51,7 +51,7 @@ public class StringEncryptor {
         }
     }
 
-    private static String retrieveEncryptionMethod() {
+    public static String retrieveEncryptionMethod() {
         String[] availableEncryptionMethods = {"Caesar Cipher",
                 "Mixed Alphabet Cipher", "Vigenere Cipher"};
         for (int i = 0; i < availableEncryptionMethods.length; i++) {
@@ -60,7 +60,7 @@ public class StringEncryptor {
         return availableEncryptionMethods[retrieveInteger("Enter encryption method: ", 1, availableEncryptionMethods.length) -1];
     }
 
-    private static String convertAlphabets(String plaintext, String unscrambledAlphabet, String scrambledAlphabet) {
+    public static String convertAlphabets(String plaintext, String unscrambledAlphabet, String scrambledAlphabet) {
         StringBuilder cipherTextStringBuilder = new StringBuilder();
         for(char character : plaintext.toCharArray()) {
             int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
@@ -77,7 +77,7 @@ public class StringEncryptor {
         return cipherTextStringBuilder.toString();
     }
 
-    private static String[] caesarCipher(String plaintext, int shiftKey) {
+    public static String[] caesarCipher(String plaintext, int shiftKey) {
         String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
         int pointer = shiftKey;
         StringBuilder scrambledAlphabetStringBuilder = new StringBuilder();
@@ -93,7 +93,7 @@ public class StringEncryptor {
         return new String[]{cipherText, Integer.toString(shiftKey)};
     }
 
-    private static String[] mixedAlphabetCipher(String plaintext, String keyString) {
+    public static String[] mixedAlphabetCipher(String plaintext, String keyString) {
         String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder scrambledAlphabetStringBuilder = new StringBuilder();
         for (char character : keyString.toCharArray()) {
