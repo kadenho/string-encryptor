@@ -1,3 +1,5 @@
+package main;
+
 import java.util.Scanner;
 
 public class StringEncryptor {
@@ -75,9 +77,8 @@ public class StringEncryptor {
         return cipherTextStringBuilder.toString();
     }
 
-    private static String[] caesarCipher(String plaintext) {
+    private static String[] caesarCipher(String plaintext, int shiftKey) {
         String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
-        int shiftKey = retrieveInteger("Enter key (1-25): ", 1, 25);
         int pointer = shiftKey;
         StringBuilder scrambledAlphabetStringBuilder = new StringBuilder();
         for (int i = 0; i < 26; i++) {
@@ -92,9 +93,8 @@ public class StringEncryptor {
         return new String[]{cipherText, Integer.toString(shiftKey)};
     }
 
-    private static String[] mixedAlphabetCipher(String plaintext) {
+    private static String[] mixedAlphabetCipher(String plaintext, String keyString) {
         String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
-        String keyString = retrieveString("Enter key: ", true).toLowerCase();
         StringBuilder scrambledAlphabetStringBuilder = new StringBuilder();
         for (char character : keyString.toCharArray()) {
             if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(character)) == -1){
@@ -116,13 +116,15 @@ public class StringEncryptor {
         String chosenEncryptionMethod = retrieveEncryptionMethod();
         switch (chosenEncryptionMethod) {
             case "Caesar Cipher":
-                String[] caesarCipherOutcome = caesarCipher(plaintext);
+                int shiftKey = retrieveInteger("Enter key (1-25): ", 1, 25);
+                String[] caesarCipherOutcome = caesarCipher(plaintext, shiftKey);
                 System.out.println("{Caesar Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + caesarCipherOutcome[0] +
                         "\nKey: " + caesarCipherOutcome[1]);
                 break;
             case "Mixed Alphabet Cipher":
-                String[] mixedAlphabetCipherOutcome = mixedAlphabetCipher(plaintext);
+                String keyString = retrieveString("Enter key: ", true).toLowerCase();
+                String[] mixedAlphabetCipherOutcome = mixedAlphabetCipher(plaintext, keyString);
                 System.out.println("{Mixed Alphabet Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + mixedAlphabetCipherOutcome[0] +
                         "\nKey: " + mixedAlphabetCipherOutcome[1]);
@@ -134,5 +136,6 @@ public class StringEncryptor {
                 System.out.println("Error: Unable to find encryption method");
                 System.exit(1);
         }
+        scanner.close();
     }
 }
