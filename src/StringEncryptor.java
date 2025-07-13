@@ -3,28 +3,6 @@ import java.util.Scanner;
 public class StringEncryptor {
     public static final Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        String plaintext = retrieveString("Enter plaintext string: ");
-        String chosenEncryptionMethod = retrieveEncryptionMethod();
-        switch (chosenEncryptionMethod) {
-            case "Caesar Cipher":
-                String[] caesarCipherOutcome = caesarCipher(plaintext);
-                System.out.println("{Caesar Cipher}\nPlaintext: "
-                        + plaintext + "\nCiphertext: " + caesarCipherOutcome[0] +
-                        "\nKey: " + caesarCipherOutcome[1]);
-                break;
-            case "Vigenere Cipher":
-                System.out.println("Vigenere Cipher");
-                break;
-            case "Mixed Alphabet Cipher":
-                System.out.println("Mixed Alphabet Cipher");
-                break;
-            default:
-                System.out.println("Error: Unable to find encryption method");
-                System.exit(1);
-        }
-    }
-
     private static String retrieveString(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine();
@@ -97,5 +75,27 @@ public class StringEncryptor {
         }
         String cipherText = cipherTextStringBuilder.toString();
         return new String[]{cipherText, Integer.toString(shiftKey)};
+    }
+
+    public static void main(String[] args) {
+        String plaintext = retrieveString("Enter plaintext string: ");
+        String chosenEncryptionMethod = retrieveEncryptionMethod();
+        switch (chosenEncryptionMethod) {
+            case "Caesar Cipher":
+                String[] caesarCipherOutcome = caesarCipher(plaintext);
+                System.out.println("{Caesar Cipher}\nPlaintext: "
+                        + plaintext + "\nCiphertext: " + caesarCipherOutcome[0] +
+                        "\nKey: " + caesarCipherOutcome[1]);
+                break;
+            case "Vigenere Cipher":
+                System.out.println("Vigenere Cipher");
+                break;
+            case "Mixed Alphabet Cipher":
+                System.out.println("Mixed Alphabet Cipher");
+                break;
+            default:
+                System.out.println("Error: Unable to find encryption method");
+                System.exit(1);
+        }
     }
 }
