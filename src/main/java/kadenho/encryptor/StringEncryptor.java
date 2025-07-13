@@ -1,4 +1,4 @@
-package java;
+package kadenho.encryptor;
 
 import java.util.Scanner;
 
