@@ -8,7 +8,10 @@ public class StringEncryptor {
         String chosenEncryptionMethod = retrieveEncryptionMethod();
         switch (chosenEncryptionMethod) {
             case "Caesar Cipher":
-                System.out.println("Caesar Cipher");
+                String[] caesarCipherOutcome = caesarCipher(plaintext);
+                System.out.println("{Caesar Cipher}\nPlaintext: "
+                        + plaintext + "\nCiphertext: " + caesarCipherOutcome[0] +
+                        "\nKey: " + caesarCipherOutcome[1]);
                 break;
             case "Vigenere Cipher":
                 System.out.println("Vigenere Cipher");
@@ -64,5 +67,35 @@ public class StringEncryptor {
             System.out.println("[" + (i + 1) + "] " + availableEncryptionMethods[i]);
         }
         return availableEncryptionMethods[retrieveInteger("Enter encryption method: ", 1, availableEncryptionMethods.length) -1];
+    }
+
+    private static String[] caesarCipher(String plaintext) {
+        String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        int shiftKey = retrieveInteger("Enter key (1-25): ", 1, 25);
+        int pointer = shiftKey;
+        StringBuilder scrambledAlphabetStringBuilder = new StringBuilder();
+        for (int i = 0; i < 26; i++) {
+            scrambledAlphabetStringBuilder.append(unscrambledAlphabet.charAt(pointer));
+            pointer++;
+            if (pointer == 26){
+                pointer = 0;
+            }
+        }
+        String scrambledAlphabet = scrambledAlphabetStringBuilder.toString();
+        StringBuilder cipherTextStringBuilder = new StringBuilder();
+        for(char character : plaintext.toCharArray()) {
+            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            if (characterIndex >= 0) {
+                char scrambledCharacter = scrambledAlphabet.charAt(characterIndex);
+                if (Character.isUpperCase(character)){
+                    scrambledCharacter = Character.toUpperCase(scrambledCharacter);
+                }
+                cipherTextStringBuilder.append(scrambledCharacter);
+            } else {
+                cipherTextStringBuilder.append(character);
+            }
+        }
+        String cipherText = cipherTextStringBuilder.toString();
+        return new String[]{cipherText, Integer.toString(shiftKey)};
     }
 }
