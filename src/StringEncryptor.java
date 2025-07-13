@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class StringEncryptor {
+    public static final Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         String plaintext = retrieveString("Enter plaintext string: ");
         String chosenEncryptionMethod = retrieveEncryptionMethod();
@@ -21,32 +23,46 @@ public class StringEncryptor {
     }
 
     private static String retrieveString(String prompt) {
-        Scanner scanner = new Scanner(System.in);
         System.out.print(prompt);
         return scanner.nextLine();
     }
 
+    private static int retrieveInteger(String prompt) {
+        System.out.print(prompt);
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid entry, must enter an integer");
+            return retrieveInteger(prompt);
+        }
+    }
+
+    private static int retrieveInteger(String prompt, int lowerBound, int upperBound) {
+        System.out.print(prompt);
+        int retrievedEntry;
+        try {
+            retrievedEntry = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid entry, must enter an integer");
+            return retrieveInteger(prompt, lowerBound, upperBound);
+        }
+        if (retrievedEntry < lowerBound) {
+            System.out.println("Invalid entry, must be no less than " + lowerBound);
+            return retrieveInteger(prompt, lowerBound, upperBound);
+        } else if (retrievedEntry > upperBound) {
+            System.out.println("Invalid entry, must be no more than " + upperBound);
+            return retrieveInteger(prompt, lowerBound, upperBound);
+        } else {
+            return retrievedEntry;
+        }
+    }
+
     private static String retrieveEncryptionMethod() {
-        Scanner scanner = new Scanner(System.in);
         String[] availableEncryptionMethods = {"Caesar Cipher", "Vigenere Cipher",
                 "Mixed Alphabet Cipher"};
         for (int i = 0; i < availableEncryptionMethods.length; i++) {
             System.out.println("[" + (i + 1) + "] " + availableEncryptionMethods[i]);
         }
-        System.out.print("Enter encryption method: ");
-        int retrievedAnswer;
-        try {
-            retrievedAnswer = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid entry, must enter an integer");
-            return retrieveEncryptionMethod();
-        } try {
-            return availableEncryptionMethods[retrievedAnswer - 1];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Invalid entry, must be between 1 and " + availableEncryptionMethods.length);
-            return retrieveEncryptionMethod();
-        }
+        return availableEncryptionMethods[retrieveInteger("Enter encryption method: ", 1, availableEncryptionMethods.length) -1];
     }
-
-
 }
