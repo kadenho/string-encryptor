@@ -97,13 +97,13 @@ public class StringEncryptor {
         String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder scrambledAlphabetStringBuilder = new StringBuilder();
         for (char character : keyString.toCharArray()) {
-            if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(character)) == -1){
-                scrambledAlphabetStringBuilder.append(character);
+            if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1){
+                scrambledAlphabetStringBuilder.append(Character.toLowerCase(character));
             }
         }
         for (char character : unscrambledAlphabet.toCharArray()) {
-            if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(character)) == -1){
-                scrambledAlphabetStringBuilder.append(character);
+            if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1){
+                scrambledAlphabetStringBuilder.append(Character.toLowerCase(character));
             }
         }
         String scrambledAlphabet = scrambledAlphabetStringBuilder.toString();
