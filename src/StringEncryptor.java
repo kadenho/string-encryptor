@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class StringEncryptor {
     public static void main(String[] args) {
-        String plaintext = retrieveString();
+        String plaintext = retrieveString("Enter plaintext string: ");
         String chosenEncryptionMethod = retrieveEncryptionMethod();
         switch (chosenEncryptionMethod) {
             case "Caesar Cipher":
@@ -20,9 +20,9 @@ public class StringEncryptor {
         }
     }
 
-    private static String retrieveString() {
+    private static String retrieveString(String prompt) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter plaintext string: ");
+        System.out.print(prompt);
         return scanner.nextLine();
     }
 
@@ -47,4 +47,6 @@ public class StringEncryptor {
             return retrieveEncryptionMethod();
         }
     }
+
+
 }
