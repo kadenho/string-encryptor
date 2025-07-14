@@ -123,7 +123,7 @@ public class StringEncryptor {
                         "\nKey: " + caesarCipherOutcome[1]);
                 break;
             case "Mixed Alphabet Cipher":
-                String keyString = retrieveString("Enter key: ", true).toLowerCase();
+                String keyString = retrieveString("Enter key: ", true);
                 String[] mixedAlphabetCipherOutcome = mixedAlphabetCipher(plaintext, keyString);
                 System.out.println("{Mixed Alphabet Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + mixedAlphabetCipherOutcome[0] +
