@@ -144,17 +144,17 @@ public class StringEncryptor {
         switch (chosenEncryptionMethod) {
             case "Caesar Cipher":
                 int shiftKey = retrieveInteger("Enter key (1-25): ", 1, 25);
-                String[] caesarCipherOutcome = caesarCipher(plaintext, shiftKey);
+                String[] caesarCipherOutput = caesarCipher(plaintext, shiftKey);
                 System.out.println("{Caesar Cipher}\nPlaintext: "
-                        + plaintext + "\nCiphertext: " + caesarCipherOutcome[0] +
-                        "\nKey: " + caesarCipherOutcome[1]);
+                        + plaintext + "\nCiphertext: " + caesarCipherOutput[0] +
+                        "\nKey: " + caesarCipherOutput[1]);
                 break;
             case "Mixed Alphabet Cipher":
                 String mixedAlphabetKeyString = retrieveString("Enter key: ", true);
-                String[] mixedAlphabetCipherOutcome = mixedAlphabetCipher(plaintext, mixedAlphabetKeyString);
+                String[] mixedAlphabetCipherOutput = mixedAlphabetCipher(plaintext, mixedAlphabetKeyString);
                 System.out.println("{Mixed Alphabet Cipher}\nPlaintext: "
-                        + plaintext + "\nCiphertext: " + mixedAlphabetCipherOutcome[0] +
-                        "\nKey: " + mixedAlphabetCipherOutcome[1]);
+                        + plaintext + "\nCiphertext: " + mixedAlphabetCipherOutput[0] +
+                        "\nKey: " + mixedAlphabetCipherOutput[1]);
                 break;
             case "Vigenere Cipher":
                 String vigenereCipherKeyString = retrieveString("Enter key: ", true);
