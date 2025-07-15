@@ -21,16 +21,6 @@ public class StringEncryptor {
         }
     }
 
-    public static int retrieveInteger(String prompt) {
-        System.out.print(prompt);
-        try {
-            return Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid entry, must enter an integer");
-            return retrieveInteger(prompt);
-        }
-    }
-
     public static int retrieveInteger(String prompt, int lowerBound, int upperBound) {
         System.out.print(prompt);
         int retrievedEntry;
@@ -114,6 +104,40 @@ public class StringEncryptor {
         return new String[]{cipherText, keyString};
     }
 
+    public static String[] vigenereCipher(String plainText, String keyString) {
+        String filteredPlaintext = plainText.replaceAll("[^a-zA-Z]", "");
+        StringBuilder lengthenedKeyStringBuilder = new StringBuilder();
+        int pointer = 0;
+        while (lengthenedKeyStringBuilder.length() < filteredPlaintext.length()){
+            lengthenedKeyStringBuilder.append(keyString.charAt(pointer));
+            pointer++;
+            if (pointer == keyString.length()) {
+                pointer = 0;
+            }
+        }
+        String lengthenedKeyString = lengthenedKeyStringBuilder.toString();
+
+        String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        StringBuilder cipherTextStringBuilder = new StringBuilder();
+        pointer = 0;
+        for (char character : plainText.toCharArray()) {
+            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            if (characterIndex >= 0) {
+                int indexShift = unscrambledAlphabet.indexOf(lengthenedKeyString.charAt(pointer));
+                pointer++;
+                char scrambledCharacter = unscrambledAlphabet.charAt((characterIndex + indexShift) % 26);
+                if (Character.isUpperCase(character)){
+                    scrambledCharacter = Character.toUpperCase(scrambledCharacter);
+                }
+                cipherTextStringBuilder.append(scrambledCharacter);
+            } else {
+                cipherTextStringBuilder.append(character);
+            }
+        }
+        String cipherText = cipherTextStringBuilder.toString();
+        return new String[]{cipherText, keyString};
+    }
+
     public static void main(String[] args) {
         String plaintext = retrieveString("Enter plaintext string: ", false);
         String chosenEncryptionMethod = retrieveEncryptionMethod();
@@ -126,14 +150,18 @@ public class StringEncryptor {
                         "\nKey: " + caesarCipherOutcome[1]);
                 break;
             case "Mixed Alphabet Cipher":
-                String keyString = retrieveString("Enter key: ", true);
-                String[] mixedAlphabetCipherOutcome = mixedAlphabetCipher(plaintext, keyString);
+                String mixedAlphabetKeyString = retrieveString("Enter key: ", true);
+                String[] mixedAlphabetCipherOutcome = mixedAlphabetCipher(plaintext, mixedAlphabetKeyString);
                 System.out.println("{Mixed Alphabet Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + mixedAlphabetCipherOutcome[0] +
                         "\nKey: " + mixedAlphabetCipherOutcome[1]);
                 break;
             case "Vigenere Cipher":
-                System.out.println("Vigenere Cipher");
+                String vigenereCipherKeyString = retrieveString("Enter key: ", true);
+                String[] vigenereCipherOutput = vigenereCipher(plaintext, vigenereCipherKeyString);
+                System.out.println("{Vigenere Cipher}\nPlaintext: "
+                        + plaintext + "\nCiphertext: " + vigenereCipherOutput[0] +
+                        "\nKey: " + vigenereCipherOutput[1]);
                 break;
             default:
                 System.out.println("Error: Unable to find encryption method");
