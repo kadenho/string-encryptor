@@ -123,7 +123,7 @@ public class StringEncryptor {
         for (char character : plainText.toCharArray()) {
             int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
-                int indexShift = unscrambledAlphabet.indexOf(lengthenedKeyString.charAt(pointer));
+                int indexShift = unscrambledAlphabet.indexOf(Character.toLowerCase(lengthenedKeyString.charAt(pointer)));
                 pointer++;
                 char scrambledCharacter = unscrambledAlphabet.charAt((characterIndex + indexShift) % 26);
                 if (Character.isUpperCase(character)){
@@ -145,21 +145,21 @@ public class StringEncryptor {
             case "Caesar Cipher":
                 int shiftKey = retrieveInteger("Enter key (1-25): ", 1, 25);
                 String[] caesarCipherOutput = caesarCipher(plaintext, shiftKey);
-                System.out.println("{Caesar Cipher}\nPlaintext: "
+                System.out.println("\n{Caesar Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + caesarCipherOutput[0] +
                         "\nKey: " + caesarCipherOutput[1]);
                 break;
             case "Mixed Alphabet Cipher":
                 String mixedAlphabetKeyString = retrieveString("Enter key: ", true);
                 String[] mixedAlphabetCipherOutput = mixedAlphabetCipher(plaintext, mixedAlphabetKeyString);
-                System.out.println("{Mixed Alphabet Cipher}\nPlaintext: "
+                System.out.println("\n{Mixed Alphabet Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + mixedAlphabetCipherOutput[0] +
                         "\nKey: " + mixedAlphabetCipherOutput[1]);
                 break;
             case "Vigenere Cipher":
                 String vigenereCipherKeyString = retrieveString("Enter key: ", true);
                 String[] vigenereCipherOutput = vigenereCipher(plaintext, vigenereCipherKeyString);
-                System.out.println("{Vigenere Cipher}\nPlaintext: "
+                System.out.println("\n{Vigenere Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + vigenereCipherOutput[0] +
                         "\nKey: " + vigenereCipherOutput[1]);
                 break;
