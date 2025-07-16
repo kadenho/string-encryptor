@@ -116,7 +116,6 @@ public class StringEncryptor {
             }
         }
         String lengthenedKeyString = lengthenedKeyStringBuilder.toString();
-
         String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder cipherTextStringBuilder = new StringBuilder();
         pointer = 0;
