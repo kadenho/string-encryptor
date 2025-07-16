@@ -42,7 +42,7 @@ public class StringEncryptor {
     }
 
     public static String retrieveEncryptionMethod() {
-        String[] availableEncryptionMethods = {"Caesar Cipher",
+        String[] availableEncryptionMethods = {"Atbash Transform", "Caesar Cipher",
                 "Mixed Alphabet Cipher", "Vigenere Cipher", "Autokey Cipher"};
         StringBuilder encryptionMethodPromptBuilder = new StringBuilder();
         for (int i = 0; i < availableEncryptionMethods.length; i++) {
@@ -70,7 +70,7 @@ public class StringEncryptor {
         return cipherTextStringBuilder.toString();
     }
 
-    private static String[] encryptPolyAlphabetically(String plainText, String keyString, String lengthenedKeyString) {
+    private static String encryptPolyAlphabetically(String plainText, String lengthenedKeyString) {
         int pointer;
         String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder cipherTextStringBuilder = new StringBuilder();
@@ -89,8 +89,7 @@ public class StringEncryptor {
                 cipherTextStringBuilder.append(character);
             }
         }
-        String cipherText = cipherTextStringBuilder.toString();
-        return new String[]{cipherText, keyString};
+        return cipherTextStringBuilder.toString();
     }
 
 
@@ -112,7 +111,6 @@ public class StringEncryptor {
         String cipherText = cipherTextStringBuilder.toString();
         return new String[]{cipherText, Integer.toString(shiftKey)};
     }
-
 
 
     public static String[] mixedAlphabetCipher(String plaintext, String keyString) {
@@ -145,7 +143,7 @@ public class StringEncryptor {
             }
         }
         String lengthenedKeyString = lengthenedKeyStringBuilder.toString();
-        return encryptPolyAlphabetically(plainText, keyString, lengthenedKeyString);
+        return new String[] {encryptPolyAlphabetically(plainText, lengthenedKeyString), keyString};
     }
 
     public static String[] autokeyCipher(String plainText, String keyString) {
@@ -157,7 +155,7 @@ public class StringEncryptor {
             pointer++;
         }
         String lengthenedKeyString = lengthenedKeyStringBuilder.toString();
-        return encryptPolyAlphabetically(plainText, keyString, lengthenedKeyString);
+        return new String[] {encryptPolyAlphabetically(plainText, lengthenedKeyString), keyString};
     }
 
     public static void main(String[] args) {
