@@ -14,8 +14,8 @@ Follow instructions in the terminal
 ### Encryption methods:
 Caesar Cipher: Complete \
 Mixed Alphabet Cipher: Complete \
-Vigenere Cipher: Complete
-Autokey Cipher: In development \
+Vigenere Cipher: Complete \
+Autokey Cipher: Complete \
 Affine Cipher: In development \
 Atbash Transform: In development \
 Blowfish: Planned \
