@@ -93,6 +93,25 @@ public class StringEncryptor {
     }
 
 
+    public static String atbashTransform(String plaintext) {
+        String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        StringBuilder cipherTextStringBuilder = new StringBuilder();
+        for (char character : plaintext.toCharArray()) {
+            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            if (characterIndex >= 0) {
+                char scrambledCharacter = unscrambledAlphabet.charAt((unscrambledAlphabet.length() - 1) - characterIndex);
+                if (Character.isUpperCase(character)) {
+                    scrambledCharacter = Character.toUpperCase(scrambledCharacter);
+                }
+                cipherTextStringBuilder.append(scrambledCharacter);
+            } else {
+                cipherTextStringBuilder.append(character);
+            }
+        }
+        return cipherTextStringBuilder.toString();
+    }
+
+
     public static String[] caesarCipher(String plaintext, int shiftKey) {
         String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder cipherTextStringBuilder = new StringBuilder();
@@ -162,6 +181,11 @@ public class StringEncryptor {
         String plaintext = retrieveString("Enter plaintext string: ", false);
         String chosenEncryptionMethod = retrieveEncryptionMethod();
         switch (chosenEncryptionMethod) {
+            case "Atbash Transform":
+                String atbashTransformOutput = atbashTransform(plaintext);
+                System.out.println("\n{Atbash Transform}\nPlaintext: "
+                        + plaintext + "\nCiphertext: " + atbashTransformOutput);
+                break;
             case "Caesar Cipher":
                 int shiftKey = retrieveInteger("Enter key (1-25): ", 1, 25);
                 String[] caesarCipherOutput = caesarCipher(plaintext, shiftKey);
