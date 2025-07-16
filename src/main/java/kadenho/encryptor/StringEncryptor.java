@@ -7,8 +7,8 @@ public class StringEncryptor {
 
     public static String retrieveString(String prompt, Boolean alphabetOnly) {
         System.out.print(prompt);
-        String retrievedEntry =  scanner.nextLine();
-        if (retrievedEntry.isEmpty()){
+        String retrievedEntry = scanner.nextLine();
+        if (retrievedEntry.isEmpty()) {
             System.out.println("Invalid entry, cannot be empty");
             return retrieveString(prompt, alphabetOnly);
         } else {
@@ -47,16 +47,16 @@ public class StringEncryptor {
         for (int i = 0; i < availableEncryptionMethods.length; i++) {
             System.out.println("[" + (i + 1) + "] " + availableEncryptionMethods[i]);
         }
-        return availableEncryptionMethods[retrieveInteger("Enter encryption method: ", 1, availableEncryptionMethods.length) -1];
+        return availableEncryptionMethods[retrieveInteger("Enter encryption method: ", 1, availableEncryptionMethods.length) - 1];
     }
 
     public static String convertAlphabets(String plaintext, String unscrambledAlphabet, String scrambledAlphabet) {
         StringBuilder cipherTextStringBuilder = new StringBuilder();
-        for(char character : plaintext.toCharArray()) {
+        for (char character : plaintext.toCharArray()) {
             int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
                 char scrambledCharacter = scrambledAlphabet.charAt(characterIndex);
-                if (Character.isUpperCase(character)){
+                if (Character.isUpperCase(character)) {
                     scrambledCharacter = Character.toUpperCase(scrambledCharacter);
                 }
                 cipherTextStringBuilder.append(scrambledCharacter);
@@ -74,7 +74,7 @@ public class StringEncryptor {
             int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
                 char scrambledCharacter = unscrambledAlphabet.charAt((characterIndex + shiftKey) % 26);
-                if (Character.isUpperCase(character)){
+                if (Character.isUpperCase(character)) {
                     scrambledCharacter = Character.toUpperCase(scrambledCharacter);
                 }
                 cipherTextStringBuilder.append(scrambledCharacter);
@@ -90,12 +90,12 @@ public class StringEncryptor {
         String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder scrambledAlphabetStringBuilder = new StringBuilder();
         for (char character : keyString.toCharArray()) {
-            if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1){
+            if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1) {
                 scrambledAlphabetStringBuilder.append(Character.toLowerCase(character));
             }
         }
         for (char character : unscrambledAlphabet.toCharArray()) {
-            if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1){
+            if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1) {
                 scrambledAlphabetStringBuilder.append(Character.toLowerCase(character));
             }
         }
@@ -108,7 +108,7 @@ public class StringEncryptor {
         String filteredPlaintext = plainText.replaceAll("[^a-zA-Z]", "");
         StringBuilder lengthenedKeyStringBuilder = new StringBuilder();
         int pointer = 0;
-        while (lengthenedKeyStringBuilder.length() < filteredPlaintext.length()){
+        while (lengthenedKeyStringBuilder.length() < filteredPlaintext.length()) {
             lengthenedKeyStringBuilder.append(keyString.charAt(pointer));
             pointer++;
             if (pointer == keyString.length()) {
@@ -125,7 +125,7 @@ public class StringEncryptor {
                 int indexShift = unscrambledAlphabet.indexOf(Character.toLowerCase(lengthenedKeyString.charAt(pointer)));
                 pointer++;
                 char scrambledCharacter = unscrambledAlphabet.charAt((characterIndex + indexShift) % 26);
-                if (Character.isUpperCase(character)){
+                if (Character.isUpperCase(character)) {
                     scrambledCharacter = Character.toUpperCase(scrambledCharacter);
                 }
                 cipherTextStringBuilder.append(scrambledCharacter);
