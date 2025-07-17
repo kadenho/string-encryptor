@@ -80,7 +80,7 @@ public class StringEncryptor {
             if (characterIndex >= 0) {
                 int indexShift = unscrambledAlphabet.indexOf(Character.toLowerCase(lengthenedKeyString.charAt(pointer)));
                 pointer++;
-                char scrambledCharacter = unscrambledAlphabet.charAt((characterIndex + indexShift) % 26);
+                char scrambledCharacter = unscrambledAlphabet.charAt((characterIndex + indexShift) % unscrambledAlphabet.length());
                 if (Character.isUpperCase(character)) {
                     scrambledCharacter = Character.toUpperCase(scrambledCharacter);
                 }
@@ -118,7 +118,7 @@ public class StringEncryptor {
         for (char character : plaintext.toCharArray()) {
             int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
-                char scrambledCharacter = unscrambledAlphabet.charAt((characterIndex + shiftKey) % 26);
+                char scrambledCharacter = unscrambledAlphabet.charAt((characterIndex + shiftKey) % unscrambledAlphabet.length());
                 if (Character.isUpperCase(character)) {
                     scrambledCharacter = Character.toUpperCase(scrambledCharacter);
                 }
