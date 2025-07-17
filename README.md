@@ -12,12 +12,12 @@ Run the PasswordGenerator.java file \
 Follow instructions in the terminal
 
 ### Encryption methods:
+Atbash Transform: Complete \
 Caesar Cipher: Complete \
 Mixed Alphabet Cipher: Complete \
 Vigenere Cipher: Complete \
 Autokey Cipher: Complete \
 Affine Cipher: In development \
-Atbash Transform: In development \
 Blowfish: Planned \
 Twofish: Planned \
 Advanced Encryption Standard: Planned \
