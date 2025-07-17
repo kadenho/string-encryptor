@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class StringEncryptor {
     public static final Scanner scanner = new Scanner(System.in);
+    public static final String[] availableEncryptionMethods = {"Atbash Transform", "Caesar Cipher",
+            "Mixed Alphabet Cipher", "Vigenere Cipher", "Autokey Cipher"};
 
     public static String retrieveString(String prompt, Boolean alphabetOnly) {
         System.out.print(prompt);
@@ -42,8 +44,6 @@ public class StringEncryptor {
     }
 
     public static String retrieveEncryptionMethod() {
-        String[] availableEncryptionMethods = {"Atbash Transform", "Caesar Cipher",
-                "Mixed Alphabet Cipher", "Vigenere Cipher", "Autokey Cipher"};
         StringBuilder encryptionMethodPromptBuilder = new StringBuilder();
         for (int i = 0; i < availableEncryptionMethods.length; i++) {
             encryptionMethodPromptBuilder.append("\n[").append(i + 1).append("] ").append(availableEncryptionMethods[i]);
