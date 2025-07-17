@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class StringEncryptor {
     public static final Scanner scanner = new Scanner(System.in);
+    public static final String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
     public static final String[] availableEncryptionMethods = {"Atbash Transform", "Caesar Cipher",
             "Affine Cipher", "Mixed Alphabet Cipher", "Vigenere Cipher", "Autokey Cipher"};
 
@@ -92,7 +93,6 @@ public class StringEncryptor {
 
     private static String encryptPolyAlphabetically(String plainText, String lengthenedKeyString) {
         int pointer;
-        String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder cipherTextStringBuilder = new StringBuilder();
         pointer = 0;
         for (char character : plainText.toCharArray()) {
@@ -114,7 +114,6 @@ public class StringEncryptor {
 
 
     public static String atbashTransform(String plaintext) {
-        String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder cipherTextStringBuilder = new StringBuilder();
         for (char character : plaintext.toCharArray()) {
             int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
@@ -133,7 +132,6 @@ public class StringEncryptor {
 
 
     public static String[] caesarCipher(String plaintext, int shiftKey) {
-        String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder cipherTextStringBuilder = new StringBuilder();
         for (char character : plaintext.toCharArray()) {
             int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
@@ -153,7 +151,6 @@ public class StringEncryptor {
 
 
     public static String[] affineCipher(String plaintext, int multiplicativeKey, int additiveKey) {
-        String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder cipherTextStringBuilder = new StringBuilder();
         for (char character : plaintext.toCharArray()) {
             int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
@@ -173,7 +170,6 @@ public class StringEncryptor {
 
 
     public static String[] mixedAlphabetCipher(String plaintext, String keyString) {
-        String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder scrambledAlphabetStringBuilder = new StringBuilder();
         for (char character : keyString.toCharArray()) {
             if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1) {
