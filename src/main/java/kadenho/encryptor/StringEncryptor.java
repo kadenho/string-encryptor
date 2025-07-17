@@ -1,11 +1,12 @@
 package kadenho.encryptor;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class StringEncryptor {
     public static final Scanner scanner = new Scanner(System.in);
     public static final String[] availableEncryptionMethods = {"Atbash Transform", "Caesar Cipher",
-            "Mixed Alphabet Cipher", "Vigenere Cipher", "Autokey Cipher"};
+            "Affine Cipher", "Mixed Alphabet Cipher", "Vigenere Cipher", "Autokey Cipher"};
 
     public static String retrieveString(String prompt, Boolean alphabetOnly) {
         System.out.print(prompt);
@@ -41,6 +42,25 @@ public class StringEncryptor {
         } else {
             return retrievedEntry;
         }
+    }
+
+    public static int retrieveFromIntegerList(String prompt, int[] integerOptions) {
+        System.out.println("Options: " + Arrays.toString(integerOptions));
+        System.out.print(prompt);
+        int retrievedEntry;
+        try {
+            retrievedEntry = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid entry, must enter an integer");
+            return retrieveFromIntegerList(prompt, integerOptions);
+        }
+        if  (Arrays.stream(integerOptions).anyMatch(num -> num == retrievedEntry)) {
+            return retrievedEntry;
+        } else {
+            System.out.println("Invalid entry, not an available option");
+            return retrieveFromIntegerList(prompt, integerOptions);
+        }
+
     }
 
     public static String retrieveEncryptionMethod() {
@@ -132,6 +152,26 @@ public class StringEncryptor {
     }
 
 
+    public static String[] affineCipher(String plaintext, int multiplicativeKey, int additiveKey) {
+        String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        StringBuilder cipherTextStringBuilder = new StringBuilder();
+        for (char character : plaintext.toCharArray()) {
+            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            if (characterIndex >= 0) {
+                char scrambledCharacter = unscrambledAlphabet.charAt(((multiplicativeKey * characterIndex) + additiveKey) % unscrambledAlphabet.length());
+                if (Character.isUpperCase(character)) {
+                    scrambledCharacter = Character.toUpperCase(scrambledCharacter);
+                }
+                cipherTextStringBuilder.append(scrambledCharacter);
+            } else {
+                cipherTextStringBuilder.append(character);
+            }
+        }
+        String cipherText = cipherTextStringBuilder.toString();
+        return new String[]{cipherText, Integer.toString(multiplicativeKey), Integer.toString(additiveKey)};
+    }
+
+
     public static String[] mixedAlphabetCipher(String plaintext, String keyString) {
         String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder scrambledAlphabetStringBuilder = new StringBuilder();
@@ -187,11 +227,21 @@ public class StringEncryptor {
                         + plaintext + "\nCiphertext: " + atbashTransformOutput);
                 break;
             case "Caesar Cipher":
-                int shiftKey = retrieveInteger("Enter key (1-25): ", 1, 25);
-                String[] caesarCipherOutput = caesarCipher(plaintext, shiftKey);
+                int caesarShiftKey = retrieveInteger("Enter key (1-25): ", 1, 25);
+                String[] caesarCipherOutput = caesarCipher(plaintext, caesarShiftKey);
                 System.out.println("\n{Caesar Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + caesarCipherOutput[0] +
                         "\nKey: " + caesarCipherOutput[1]);
+                break;
+            case "Affine Cipher":
+                int[] coprimesOfTwentySix = {1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25};
+                int multiplicativeKey = retrieveFromIntegerList("Enter multiplicative key: ", coprimesOfTwentySix);
+                int additiveKey = retrieveInteger("Enter additive key: ", 0, Integer.MAX_VALUE);
+                String[] affineCipherOutput = affineCipher(plaintext, multiplicativeKey, additiveKey);
+                System.out.println("\n{Caesar Cipher}\nPlaintext: "
+                        + plaintext + "\nCiphertext: " + affineCipherOutput[0] +
+                        "\nMultiplicative key: " + affineCipherOutput[1] +
+                        "\nAdditive key: " + affineCipherOutput[2]);
                 break;
             case "Mixed Alphabet Cipher":
                 String mixedAlphabetKeyString = retrieveString("Enter key: ", true);
