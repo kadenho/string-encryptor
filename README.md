@@ -14,10 +14,10 @@ Follow instructions in the terminal
 ### Encryption methods:
 Atbash Transform: Complete \
 Caesar Cipher: Complete \
+Affine Cipher: Complete \
 Mixed Alphabet Cipher: Complete \
 Vigenere Cipher: Complete \
 Autokey Cipher: Complete \
-Affine Cipher: In development \
 Blowfish: Planned \
 Twofish: Planned \
 Advanced Encryption Standard: Planned \
