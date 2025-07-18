@@ -20,5 +20,5 @@ Vigenere Cipher: Complete \
 Autokey Cipher: Complete \
 Blowfish: Planned \
 Twofish: Planned \
-Advanced Encryption Standard: In progress \
+Advanced Encryption Standard: Planned \
 Rivest-Shamir-Adleman: Planned 
