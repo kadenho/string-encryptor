@@ -234,7 +234,7 @@ public class StringEncryptor {
                 int multiplicativeKey = retrieveFromIntegerList("Enter multiplicative key: ", coprimesOfTwentySix);
                 int additiveKey = retrieveInteger("Enter additive key: ", 0, Integer.MAX_VALUE);
                 String[] affineCipherOutput = affineCipher(plaintext, multiplicativeKey, additiveKey);
-                System.out.println("\n{Caesar Cipher}\nPlaintext: "
+                System.out.println("\n{Affine Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + affineCipherOutput[0] +
                         "\nMultiplicative key: " + affineCipherOutput[1] +
                         "\nAdditive key: " + affineCipherOutput[2]);
