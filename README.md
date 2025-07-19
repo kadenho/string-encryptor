@@ -27,8 +27,8 @@ Rivest-Shamir-Adleman: Planned
 Atbash Transform: Complete \
 Caesar Cipher: Complete \
 Affine Cipher: In development \
-Mixed Alphabet Cipher: In development \
-Vigenere Cipher: In development \
+Mixed Alphabet Cipher: Complete \
+Vigenere Cipher: Complete \
 Autokey Cipher: In development \
 Blowfish: Planned \
 Twofish: Planned \
