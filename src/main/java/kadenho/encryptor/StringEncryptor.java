@@ -131,7 +131,7 @@ public class StringEncryptor {
     }
 
 
-    public static String[] caesarCipher(String plaintext, int shiftKey) {
+    public static String[] encryptCaesarCipher(String plaintext, int shiftKey) {
         StringBuilder cipherTextStringBuilder = new StringBuilder();
         for (char character : plaintext.toCharArray()) {
             int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
@@ -150,7 +150,7 @@ public class StringEncryptor {
     }
 
 
-    public static String[] affineCipher(String plaintext, int multiplicativeKey, int additiveKey) {
+    public static String[] encryptAffineCipher(String plaintext, int multiplicativeKey, int additiveKey) {
         StringBuilder cipherTextStringBuilder = new StringBuilder();
         for (char character : plaintext.toCharArray()) {
             int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
@@ -169,7 +169,7 @@ public class StringEncryptor {
     }
 
 
-    public static String[] mixedAlphabetCipher(String plaintext, String keyString) {
+    public static String[] encryptMixedAlphabetCipher(String plaintext, String keyString) {
         StringBuilder scrambledAlphabetStringBuilder = new StringBuilder();
         for (char character : keyString.toCharArray()) {
             if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1) {
@@ -186,7 +186,7 @@ public class StringEncryptor {
         return new String[]{cipherText, keyString};
     }
 
-    public static String[] vigenereCipher(String plainText, String keyString) {
+    public static String[] encryptVigenereCipher(String plainText, String keyString) {
         String filteredPlaintext = plainText.replaceAll("[^a-zA-Z]", "");
         StringBuilder lengthenedKeyStringBuilder = new StringBuilder();
         int pointer = 0;
@@ -201,7 +201,7 @@ public class StringEncryptor {
         return new String[] {encryptPolyAlphabetically(plainText, lengthenedKeyString), keyString};
     }
 
-    public static String[] autokeyCipher(String plainText, String keyString) {
+    public static String[] encryptAutokeyCipher(String plainText, String keyString) {
         String filteredPlaintext = plainText.replaceAll("[^a-zA-Z]", "");
         StringBuilder lengthenedKeyStringBuilder = new StringBuilder(keyString);
         int pointer = 0;
@@ -224,7 +224,7 @@ public class StringEncryptor {
                 break;
             case "Caesar Cipher":
                 int caesarShiftKey = retrieveInteger("Enter key (1-25): ", 1, 25);
-                String[] caesarCipherOutput = caesarCipher(plaintext, caesarShiftKey);
+                String[] caesarCipherOutput = encryptCaesarCipher(plaintext, caesarShiftKey);
                 System.out.println("\n{Caesar Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + caesarCipherOutput[0] +
                         "\nKey: " + caesarCipherOutput[1]);
@@ -233,7 +233,7 @@ public class StringEncryptor {
                 int[] coprimesOfTwentySix = {1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25};
                 int multiplicativeKey = retrieveFromIntegerList("Enter multiplicative key: ", coprimesOfTwentySix);
                 int additiveKey = retrieveInteger("Enter additive key: ", 0, Integer.MAX_VALUE);
-                String[] affineCipherOutput = affineCipher(plaintext, multiplicativeKey, additiveKey);
+                String[] affineCipherOutput = encryptAffineCipher(plaintext, multiplicativeKey, additiveKey);
                 System.out.println("\n{Affine Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + affineCipherOutput[0] +
                         "\nMultiplicative key: " + affineCipherOutput[1] +
@@ -241,21 +241,21 @@ public class StringEncryptor {
                 break;
             case "Mixed Alphabet Cipher":
                 String mixedAlphabetKeyString = retrieveString("Enter key: ", true);
-                String[] mixedAlphabetCipherOutput = mixedAlphabetCipher(plaintext, mixedAlphabetKeyString);
+                String[] mixedAlphabetCipherOutput = encryptMixedAlphabetCipher(plaintext, mixedAlphabetKeyString);
                 System.out.println("\n{Mixed Alphabet Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + mixedAlphabetCipherOutput[0] +
                         "\nKey: " + mixedAlphabetCipherOutput[1]);
                 break;
             case "Vigenere Cipher":
                 String vigenereCipherKeyString = retrieveString("Enter key: ", true);
-                String[] vigenereCipherOutput = vigenereCipher(plaintext, vigenereCipherKeyString);
+                String[] vigenereCipherOutput = encryptVigenereCipher(plaintext, vigenereCipherKeyString);
                 System.out.println("\n{Vigenere Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + vigenereCipherOutput[0] +
                         "\nKey: " + vigenereCipherOutput[1]);
                 break;
             case "Autokey Cipher":
                 String autokeyCipherKeyString = retrieveString("Enter primer: ", true);
-                String[] autokeyCipherOutput = autokeyCipher(plaintext, autokeyCipherKeyString);
+                String[] autokeyCipherOutput = encryptAutokeyCipher(plaintext, autokeyCipherKeyString);
                 System.out.println("\n{Vigenere Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + autokeyCipherOutput[0] +
                         "\nPrimer: " + autokeyCipherOutput[1]);
