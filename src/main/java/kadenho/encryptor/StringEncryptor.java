@@ -61,7 +61,17 @@ public class StringEncryptor {
             System.out.println("Invalid entry, not an available option");
             return retrieveFromIntegerList(prompt, integerOptions);
         }
+    }
 
+    public static String retrieveOperation() {
+        String[] operations = {"Encrypt", "Decrypt"};
+        StringBuilder operationPromptBuilder = new StringBuilder();
+        for (int i = 0; i < operations.length; i++) {
+            operationPromptBuilder.append("\n[").append(i + 1).append("] ").append(operations[i]);
+        }
+        operationPromptBuilder.append("\nEnter encryption method: ");
+        String encryptionMethodPrompt = operationPromptBuilder.toString();
+        return operations[retrieveInteger(encryptionMethodPrompt, 1, operations.length) - 1];
     }
 
     public static String retrieveEncryptionMethod() {
@@ -213,8 +223,8 @@ public class StringEncryptor {
         return new String[] {encryptPolyAlphabetically(plainText, lengthenedKeyString), keyString};
     }
 
-    public static void main(String[] args) {
-        String plaintext = retrieveString("Enter plaintext string: ", false);
+    private static void encryptString() {
+        String plaintext = retrieveString("\nEnter plaintext string: ", false);
         String chosenEncryptionMethod = retrieveEncryptionMethod();
         switch (chosenEncryptionMethod) {
             case "Atbash Transform":
@@ -263,6 +273,15 @@ public class StringEncryptor {
             default:
                 System.out.println("Error: Unable to find encryption method");
                 System.exit(1);
+        }
+    }
+
+    public static void main(String[] args) {
+        String operation = retrieveOperation();
+        if (operation.equals("Encrypt")) {
+            encryptString();
+        } else if (operation.equals("Decrypt")) {
+            System.out.println("Decrypt");
         }
 
         scanner.close();
