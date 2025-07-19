@@ -306,8 +306,8 @@ public class StringEncryptor {
             case "Caesar Cipher":
                 int caesarShiftKey = retrieveInteger("Enter key (1-25): ", 1, 25);
                 String[] caesarCipherOutput = decryptCaesarCipher(ciphertext, caesarShiftKey);
-                System.out.println("\n{Caesar Cipher}\nPlaintext: "
-                        + ciphertext + "\nCiphertext: " + caesarCipherOutput[0] +
+                System.out.println("\n{Caesar Cipher}\nCiphertext: "
+                        + ciphertext + "\nPlaintext: " + caesarCipherOutput[0] +
                         "\nKey: " + caesarCipherOutput[1]);
                 break;
             case "Affine Cipher":
