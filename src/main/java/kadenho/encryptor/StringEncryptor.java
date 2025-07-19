@@ -74,6 +74,12 @@ public class StringEncryptor {
         return availableEncryptionMethods[retrieveInteger(encryptionMethodPrompt, 1, availableEncryptionMethods.length) - 1];
     }
 
+    public static String retrieveRunAgainDecision() {
+        String[] options = {"Run again", "Exit"};
+        String encryptionMethodPrompt = buildOptionsPromptList(options, "Run again: ");
+        return options[retrieveInteger(encryptionMethodPrompt, 1, options.length) - 1];
+    }
+
     private static String buildOptionsPromptList(String[] options, String enterPrompt) {
         StringBuilder optionPromptBuilder = new StringBuilder();
         for (int i = 0; i < options.length; i++) {
@@ -385,6 +391,7 @@ public class StringEncryptor {
     }
 
     public static void main(String[] args) {
+        System.out.println("{String Encryptor}");
         String operation = retrieveOperation();
         if (operation.equals("Encrypt")) {
             encryptString();
@@ -394,7 +401,16 @@ public class StringEncryptor {
             System.out.println("Error: Unable to retrieve operation");
             System.exit(2);
         }
-
+        String runAgainDecision = retrieveRunAgainDecision();
+        if (runAgainDecision.equals("Run again")) {
+            System.out.println();
+            main(args);
+        } else if (runAgainDecision.equals("Exit")) {
+            System.exit(0);
+        } else {
+            System.out.println("Error: Unable to retrieve decision");
+            System.exit(3);
+        }
         scanner.close();
     }
 }
