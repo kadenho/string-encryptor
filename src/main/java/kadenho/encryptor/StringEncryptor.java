@@ -159,6 +159,24 @@ public class StringEncryptor {
         return new String[]{cipherText, Integer.toString(shiftKey)};
     }
 
+    public static String[] decryptCaesarCipher(String plaintext, int shiftKey) {
+        int offsetShift = unscrambledAlphabet.length() - shiftKey;
+        StringBuilder cipherTextStringBuilder = new StringBuilder();
+        for (char character : plaintext.toCharArray()) {
+            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            if (characterIndex >= 0) {
+                char scrambledCharacter = unscrambledAlphabet.charAt((characterIndex + offsetShift) % unscrambledAlphabet.length());
+                if (Character.isUpperCase(character)) {
+                    scrambledCharacter = Character.toUpperCase(scrambledCharacter);
+                }
+                cipherTextStringBuilder.append(scrambledCharacter);
+            } else {
+                cipherTextStringBuilder.append(character);
+            }
+        }
+        String cipherText = cipherTextStringBuilder.toString();
+        return new String[]{cipherText, Integer.toString(shiftKey)};
+    }
 
     public static String[] encryptAffineCipher(String plaintext, int multiplicativeKey, int additiveKey) {
         StringBuilder cipherTextStringBuilder = new StringBuilder();
@@ -276,12 +294,46 @@ public class StringEncryptor {
         }
     }
 
+    private static void decryptString() {
+        String ciphertext = retrieveString("\nEnter ciphertext string: ", false);
+        String chosenEncryptionMethod = retrieveEncryptionMethod();
+        switch (chosenEncryptionMethod) {
+            case "Atbash Transform":
+                String atbashTransformOutput = atbashTransform(ciphertext);
+                System.out.println("\n{Atbash Transform}\nPlaintext: "
+                        + ciphertext + "\nCiphertext: " + atbashTransformOutput);
+                break;
+            case "Caesar Cipher":
+                int caesarShiftKey = retrieveInteger("Enter key (1-25): ", 1, 25);
+                String[] caesarCipherOutput = decryptCaesarCipher(ciphertext, caesarShiftKey);
+                System.out.println("\n{Caesar Cipher}\nPlaintext: "
+                        + ciphertext + "\nCiphertext: " + caesarCipherOutput[0] +
+                        "\nKey: " + caesarCipherOutput[1]);
+                break;
+            case "Affine Cipher":
+                System.out.print("{Affine Cipher");
+                break;
+            case "Mixed Alphabet Cipher":
+                System.out.print("{Mixed Alphabet Cipher");
+                break;
+            case "Vigenere Cipher":
+                System.out.print("{Vigenere Cipher");
+                break;
+            case "Autokey Cipher":
+                System.out.print("{Autokey Cipher");
+                break;
+            default:
+                System.out.println("Error: Unable to find encryption method");
+                System.exit(1);
+        }
+    }
+
     public static void main(String[] args) {
         String operation = retrieveOperation();
         if (operation.equals("Encrypt")) {
             encryptString();
         } else if (operation.equals("Decrypt")) {
-            System.out.println("Decrypt");
+            decryptString();
         }
 
         scanner.close();
