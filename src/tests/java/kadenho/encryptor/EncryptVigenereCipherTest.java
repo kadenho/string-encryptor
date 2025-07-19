@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-public class VigenereCipherTest {
+public class EncryptVigenereCipherTest {
     @Test
     public void lowercaseTextLowercaseShorterKey() {
         String plaintext = "pepperoni";
         String[] expectedOutput = {"emooegwmh", "pizza"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "pizza");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "pizza");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -17,7 +17,7 @@ public class VigenereCipherTest {
     public void lowercaseTextMixcaseShorterKey() {
         String plaintext = "panfriedsalmon";
         String[] expectedOutput = {"nuzrpgypeyjgaz", "Yummy"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "Yummy");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "Yummy");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -25,7 +25,7 @@ public class VigenereCipherTest {
     public void mixcaseTextLowercaseShorterKey() {
         String plaintext = "FiletMignon";
         String[] expectedOutput = {"XbpedEazrox", "steaks"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "steaks");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "steaks");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -33,7 +33,7 @@ public class VigenereCipherTest {
     public void mixcaseTextMixcaseShorterKey() {
         String plaintext = "ILoveCroutons";
         String[] expectedOutput = {"ALzvhUrzuwgnd", "salad"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "salad");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "salad");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -41,7 +41,7 @@ public class VigenereCipherTest {
     public void lowercaseSpacedTextLowercaseShorterKey() {
         String plaintext = "i love the album immunity";
         String[] expectedOutput = {"j lunf tnw blhmn isevnolz", "bags"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "bags");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "bags");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -49,7 +49,7 @@ public class VigenereCipherTest {
     public void lowercaseSpacedTextMixcaseShorterKey() {
         String plaintext = "i also really like sling";
         String[] expectedOutput = {"i mzwp remzpz liws wmins", "Amoeba"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "Amoeba");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "Amoeba");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -57,7 +57,7 @@ public class VigenereCipherTest {
     public void mixcaseSpacedTextLowercaseShorterKey() {
         String plaintext = "But one of my favorite albums is definitely Charm";
         String[] expectedOutput = {"Hfh flx cy tc xnjkxthv yepntw af raltbzrxzr Jlsea", "glorytothesnow"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "glorytothesnow");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "glorytothesnow");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -65,7 +65,7 @@ public class VigenereCipherTest {
     public void mixcaseSpacedTextMixcaseShorterKey() {
         String plaintext = "There is a Shelly EP out that I like";
         String[] expectedOutput = {"Vysjw gg u Jtmyoa VD gmr hbrf Q ylmv", "CrossYourMind"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "CrossYourMind");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "CrossYourMind");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -73,7 +73,7 @@ public class VigenereCipherTest {
     public void lowercaseSpacedMixCharTextLowercaseShorterKey() {
         String plaintext = "my favorite brand of instant raman is...shin!";
         String[] expectedOutput = {"nm blwcntus xcbbz zg wjduoje soilo wo...diwj!", "bowl"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "bowl");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "bowl");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -81,7 +81,7 @@ public class VigenereCipherTest {
     public void lowercaseSpacedMixCharTextMixcaseShorterKey() {
         String plaintext = "i wish songs were longer! i hate when a song is only 2-minutes. at least 3 minutes is better.";
         String[] expectedOutput = {"j wtdh vpnrd whse wznjfr! t sawf wspn d toyr iv pnwj 2-mloueps. du lplsw 3 niyftht id mewuec.", "Ballad"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "Ballad");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "Ballad");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -89,7 +89,7 @@ public class VigenereCipherTest {
     public void mixcaseSpacedMixCharTextLowercaseShorterKey() {
         String plaintext = "Clairo, Beabadoobee, Laufey, Sabrina Carpenter, and Suki Waterhouse are my favorite singers!";
         String[] expectedOutput = {"Eznkvf, Ugoochfhdsr, Nelygm, Fcfibpo Pcvgxphrt, eew Uixk Armgfuqyjx cfr oc wtxcekxv lkbtgvj!", "concert"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "concert");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "concert");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -97,7 +97,7 @@ public class VigenereCipherTest {
     public void mixcaseSpacedMixCharTextMixcaseShorterKey() {
         String plaintext = "I want to live in Chicago! I love the big city feel while still being near home.";
         String[] expectedOutput = {"Q hlvg hw dqgp qa Qpaklrw! V zwnm esm owo uqej nrst optwm fhqdt mpqau vwic swzs.", "Illinois"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "Illinois");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "Illinois");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -105,7 +105,7 @@ public class VigenereCipherTest {
     public void lowercaseTextLowercaseLongerKey() {
         String plaintext = "hello";
         String[] expectedOutput = {"nvpph", "greetings"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "greetings");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "greetings");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -113,7 +113,7 @@ public class VigenereCipherTest {
     public void lowercaseTextMixcaseLongerKey() {
         String plaintext = "piano";
         String[] expectedOutput = {"uwrgw", "FORTISSIMO"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "FORTISSIMO");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "FORTISSIMO");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -121,7 +121,7 @@ public class VigenereCipherTest {
     public void mixcaseTextLowercaseLongerKey() {
         String plaintext = "Duck";
         String[] expectedOutput = {"Sypq", "penguin"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "penguin");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "penguin");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -129,7 +129,7 @@ public class VigenereCipherTest {
     public void mixcaseTextMixcaseLongerKey() {
         String plaintext = "Bread";
         String[] expectedOutput = {"Tfyrg", "SourDough"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "SourDough");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "SourDough");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -137,7 +137,7 @@ public class VigenereCipherTest {
     public void lowercaseSpacedTextLowercaseLongerKey() {
         String plaintext = "hi mom";
         String[] expectedOutput = {"pu abf", "imonthetv"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "imonthetv");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "imonthetv");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -145,7 +145,7 @@ public class VigenereCipherTest {
     public void lowercaseSpacedTextMixcaseLongerKey() {
         String plaintext = "the library";
         String[] expectedOutput = {"hme wmyrnup", "ofAlexandria"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "ofAlexandria");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "ofAlexandria");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -153,7 +153,7 @@ public class VigenereCipherTest {
     public void mixcaseSpacedTextLowercaseLongerKey() {
         String plaintext = "The Old Guard";
         String[] expectedOutput = {"Ehz Wpl Rfexd", "lavieillegarde"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "lavieillegarde");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "lavieillegarde");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -161,7 +161,7 @@ public class VigenereCipherTest {
     public void mixcaseSpacedTextMixcaseLongerKey() {
         String plaintext = "University of Nebraska Omaha";
         String[] expectedOutput = {"Numprznmkq wy Lsgeetba Gwasi", "TheUniversityOfNebraskaLincoln"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "TheUniversityOfNebraskaLincoln");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "TheUniversityOfNebraskaLincoln");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -169,7 +169,7 @@ public class VigenereCipherTest {
     public void lowercaseSpacedMixCharTextLowercaseLongerKey() {
         String plaintext = "i love bacon!";
         String[] expectedOutput = {"j fhdp jkgdn!", "butilikepancakestoo"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "butilikepancakestoo");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "butilikepancakestoo");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -177,7 +177,7 @@ public class VigenereCipherTest {
     public void lowercaseSpacedMixCharTextMixcaseLongerKey() {
         String plaintext = "its a me, mario!";
         String[] expectedOutput = {"igv h uw, nrfbv!", "AndHisBrotherLuigi"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "AndHisBrotherLuigi");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "AndHisBrotherLuigi");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -185,7 +185,7 @@ public class VigenereCipherTest {
     public void mixcaseSpacedMixCharTextLowercaseLongerKey() {
         String plaintext = "My favorite game:";
         String[] expectedOutput = {"Dc idzouzxh kmbx:", "reddeadredemptiontwo"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "reddeadredemptiontwo");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "reddeadredemptiontwo");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -193,7 +193,7 @@ public class VigenereCipherTest {
     public void mixcaseSpacedMixCharTextMixcaseLongerKey() {
         String plaintext = "32GB DDR4 RAM!";
         String[] expectedOutput = {"32OO HHU4 KOG!", "INeedToUpgrade"};
-        String[] actualOutput = StringEncryptor.vigenereCipher(plaintext, "INeedToUpgrade");
+        String[] actualOutput = StringEncryptor.encryptVigenereCipher(plaintext, "INeedToUpgrade");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 }
