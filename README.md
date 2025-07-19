@@ -22,3 +22,15 @@ Blowfish: Planned \
 Twofish: Planned \
 Advanced Encryption Standard: Planned \
 Rivest-Shamir-Adleman: Planned 
+
+### Decryption methods:
+Atbash Transform: Complete \
+Caesar Cipher: Complete \
+Affine Cipher: In development \
+Mixed Alphabet Cipher: In development \
+Vigenere Cipher: In development \
+Autokey Cipher: In development \
+Blowfish: Planned \
+Twofish: Planned \
+Advanced Encryption Standard: Planned \
+Rivest-Shamir-Adleman: Planned 
