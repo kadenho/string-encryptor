@@ -84,12 +84,12 @@ public class StringEncryptor {
         return availableEncryptionMethods[retrieveInteger(encryptionMethodPrompt, 1, availableEncryptionMethods.length) - 1];
     }
 
-    public static String encryptMonoAlphabetically(String plaintext, String unscrambledAlphabet, String scrambledAlphabet) {
+    public static String convertAlphabets(String plaintext, String currentAlphabet, String newAlphabet) {
         StringBuilder cipherTextStringBuilder = new StringBuilder();
         for (char character : plaintext.toCharArray()) {
-            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            int characterIndex = currentAlphabet.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
-                char scrambledCharacter = scrambledAlphabet.charAt(characterIndex);
+                char scrambledCharacter = newAlphabet.charAt(characterIndex);
                 if (Character.isUpperCase(character)) {
                     scrambledCharacter = Character.toUpperCase(scrambledCharacter);
                 }
@@ -210,7 +210,24 @@ public class StringEncryptor {
             }
         }
         String scrambledAlphabet = scrambledAlphabetStringBuilder.toString();
-        String cipherText = encryptMonoAlphabetically(plaintext, unscrambledAlphabet, scrambledAlphabet);
+        String cipherText = convertAlphabets(plaintext, unscrambledAlphabet, scrambledAlphabet);
+        return new String[]{cipherText, keyString};
+    }
+
+    public static String[] decryptMixedAlphabetCipher(String plaintext, String keyString) {
+        StringBuilder scrambledAlphabetStringBuilder = new StringBuilder();
+        for (char character : keyString.toCharArray()) {
+            if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1) {
+                scrambledAlphabetStringBuilder.append(Character.toLowerCase(character));
+            }
+        }
+        for (char character : unscrambledAlphabet.toCharArray()) {
+            if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1) {
+                scrambledAlphabetStringBuilder.append(Character.toLowerCase(character));
+            }
+        }
+        String scrambledAlphabet = scrambledAlphabetStringBuilder.toString();
+        String cipherText = convertAlphabets(plaintext, scrambledAlphabet, unscrambledAlphabet);
         return new String[]{cipherText, keyString};
     }
 
@@ -314,7 +331,11 @@ public class StringEncryptor {
                 System.out.print("{Affine Cipher");
                 break;
             case "Mixed Alphabet Cipher":
-                System.out.print("{Mixed Alphabet Cipher");
+                String mixedAlphabetKeyString = retrieveString("Enter key: ", true);
+                String[] mixedAlphabetCipherOutput = decryptMixedAlphabetCipher(ciphertext, mixedAlphabetKeyString);
+                System.out.println("\n{Mixed Alphabet Cipher}\nCiphertext: "
+                        + ciphertext + "\nPlaintext: " + mixedAlphabetCipherOutput[0] +
+                        "\nKey: " + mixedAlphabetCipherOutput[1]);
                 break;
             case "Vigenere Cipher":
                 System.out.print("{Vigenere Cipher");
