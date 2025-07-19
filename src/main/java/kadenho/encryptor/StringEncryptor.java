@@ -65,23 +65,22 @@ public class StringEncryptor {
 
     public static String retrieveOperation() {
         String[] operations = {"Encrypt", "Decrypt"};
-        StringBuilder operationPromptBuilder = new StringBuilder();
-        for (int i = 0; i < operations.length; i++) {
-            operationPromptBuilder.append("\n[").append(i + 1).append("] ").append(operations[i]);
-        }
-        operationPromptBuilder.append("\nEnter encryption method: ");
-        String encryptionMethodPrompt = operationPromptBuilder.toString();
-        return operations[retrieveInteger(encryptionMethodPrompt, 1, operations.length) - 1];
+        String operationPrompt = buildOptionsPromptList(operations, "Enter operation: ");
+        return operations[retrieveInteger(operationPrompt, 1, operations.length) - 1];
     }
 
     public static String retrieveEncryptionMethod() {
-        StringBuilder encryptionMethodPromptBuilder = new StringBuilder();
-        for (int i = 0; i < availableEncryptionMethods.length; i++) {
-            encryptionMethodPromptBuilder.append("\n[").append(i + 1).append("] ").append(availableEncryptionMethods[i]);
-        }
-        encryptionMethodPromptBuilder.append("\nEnter encryption method: ");
-        String encryptionMethodPrompt = encryptionMethodPromptBuilder.toString();
+        String encryptionMethodPrompt = buildOptionsPromptList(availableEncryptionMethods, "Enter encryption method: ");
         return availableEncryptionMethods[retrieveInteger(encryptionMethodPrompt, 1, availableEncryptionMethods.length) - 1];
+    }
+
+    private static String buildOptionsPromptList(String[] options, String enterPrompt) {
+        StringBuilder optionPromptBuilder = new StringBuilder();
+        for (int i = 0; i < options.length; i++) {
+            optionPromptBuilder.append("\n[").append(i + 1).append("] ").append(options[i]);
+        }
+        optionPromptBuilder.append("\n").append(enterPrompt);
+        return optionPromptBuilder.toString();
     }
 
     public static String convertAlphabets(String plaintext, String currentAlphabet, String newAlphabet) {
@@ -391,6 +390,9 @@ public class StringEncryptor {
             encryptString();
         } else if (operation.equals("Decrypt")) {
             decryptString();
+        } else {
+            System.out.println("Error: Unable to retrieve operation");
+            System.exit(2);
         }
 
         scanner.close();
