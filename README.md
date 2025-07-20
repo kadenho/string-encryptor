@@ -29,7 +29,7 @@ Caesar Cipher: Complete \
 Affine Cipher: In development \
 Mixed Alphabet Cipher: Complete \
 Vigenere Cipher: Complete \
-Autokey Cipher: In development \
+Autokey Cipher: Complete \
 Blowfish: Planned \
 Twofish: Planned \
 Advanced Encryption Standard: Planned \
