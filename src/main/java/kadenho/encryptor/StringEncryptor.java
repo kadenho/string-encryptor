@@ -128,7 +128,7 @@ public class StringEncryptor {
 
     private static String decryptPolyAlphabetically(String ciphertext, String lengthenedKeyString) {
         int pointer = 0;
-        StringBuilder ciphertextStringBuilder = new StringBuilder();
+        StringBuilder plaintextStringBuilder = new StringBuilder();
         for (char character : ciphertext.toCharArray()) {
             int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
@@ -138,16 +138,16 @@ public class StringEncryptor {
                     newIndex += unscrambledAlphabet.length();
                 }
                 pointer++;
-                char scrambledCharacter = unscrambledAlphabet.charAt(newIndex);
+                char unscrambledCharacter = unscrambledAlphabet.charAt(newIndex);
                 if (Character.isUpperCase(character)) {
-                    scrambledCharacter = Character.toUpperCase(scrambledCharacter);
+                    unscrambledCharacter = Character.toUpperCase(unscrambledCharacter);
                 }
-                ciphertextStringBuilder.append(scrambledCharacter);
+                plaintextStringBuilder.append(unscrambledCharacter);
             } else {
-                ciphertextStringBuilder.append(character);
+                plaintextStringBuilder.append(character);
             }
         }
-        return ciphertextStringBuilder.toString();
+        return plaintextStringBuilder.toString();
     }
 
 
@@ -187,23 +187,23 @@ public class StringEncryptor {
         return new String[]{ciphertext, Integer.toString(shiftKey)};
     }
 
-    public static String[] decryptCaesarCipher(String plaintext, int shiftKey) {
-        StringBuilder ciphertextStringBuilder = new StringBuilder();
+    public static String[] decryptCaesarCipher(String ciphertext, int shiftKey) {
+        StringBuilder plaintextStringBuilder = new StringBuilder();
         int offsetShift = unscrambledAlphabet.length() - shiftKey;
-        for (char character : plaintext.toCharArray()) {
+        for (char character : ciphertext.toCharArray()) {
             int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
                 char scrambledCharacter = unscrambledAlphabet.charAt((characterIndex + offsetShift) % unscrambledAlphabet.length());
                 if (Character.isUpperCase(character)) {
                     scrambledCharacter = Character.toUpperCase(scrambledCharacter);
                 }
-                ciphertextStringBuilder.append(scrambledCharacter);
+                plaintextStringBuilder.append(scrambledCharacter);
             } else {
-                ciphertextStringBuilder.append(character);
+                plaintextStringBuilder.append(character);
             }
         }
-        String ciphertext = ciphertextStringBuilder.toString();
-        return new String[]{ciphertext, Integer.toString(shiftKey)};
+        String plaintext = plaintextStringBuilder.toString();
+        return new String[]{plaintext, Integer.toString(shiftKey)};
     }
 
     public static String[] encryptAffineCipher(String plaintext, int multiplicativeKey, int additiveKey) {
@@ -242,7 +242,7 @@ public class StringEncryptor {
         return new String[]{ciphertext, keyString};
     }
 
-    public static String[] decryptMixedAlphabetCipher(String plaintext, String keyString) {
+    public static String[] decryptMixedAlphabetCipher(String ciphertext, String keyString) {
         StringBuilder scrambledAlphabetStringBuilder = new StringBuilder();
         for (char character : keyString.toCharArray()) {
             if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1) {
@@ -255,8 +255,8 @@ public class StringEncryptor {
             }
         }
         String scrambledAlphabet = scrambledAlphabetStringBuilder.toString();
-        String ciphertext = convertAlphabets(plaintext, scrambledAlphabet, unscrambledAlphabet);
-        return new String[]{ciphertext, keyString};
+        String plaintext = convertAlphabets(ciphertext, scrambledAlphabet, unscrambledAlphabet);
+        return new String[]{plaintext, keyString};
     }
 
     private static String constructVigenereLengthenedKeyString(String plaintext, String keyString) {
@@ -293,6 +293,32 @@ public class StringEncryptor {
         }
         String lengthenedKeyString = lengthenedKeyStringBuilder.toString();
         return new String[] {encryptPolyAlphabetically(plaintext, lengthenedKeyString), keyString};
+    }
+
+    public static String[] decryptAutokeyCipher(String ciphertext, String keyString) {
+        int pointer = 0;
+        StringBuilder decryptionKey = new StringBuilder(keyString);
+        StringBuilder plaintextStringbuilder = new StringBuilder();
+        for (char character : ciphertext.toCharArray()) {
+            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            if (characterIndex >= 0) {
+                int indexShift = unscrambledAlphabet.indexOf(Character.toLowerCase(decryptionKey.charAt(pointer)));
+                int newIndex = characterIndex - indexShift;
+                if (newIndex < 0) {
+                    newIndex += unscrambledAlphabet.length();
+                }
+                pointer++;
+                char unscrambledCharacter = unscrambledAlphabet.charAt(newIndex);
+                decryptionKey.append(unscrambledCharacter);
+                if (Character.isUpperCase(character)) {
+                    unscrambledCharacter = Character.toUpperCase(unscrambledCharacter);
+                }
+                plaintextStringbuilder.append(unscrambledCharacter);
+            } else {
+                plaintextStringbuilder.append(character);
+            }
+        }
+        return new String[] {plaintextStringbuilder.toString(), keyString};
     }
 
     private static void encryptString() {
@@ -382,7 +408,11 @@ public class StringEncryptor {
                         "\nKey: " + vigenereCipherOutput[1]);
                 break;
             case "Autokey Cipher":
-                System.out.print("{Autokey Cipher");
+                String autokeyCipherKeyString = retrieveString("Enter primer: ", true);
+                String[] autokeyCipherOutput = decryptAutokeyCipher(ciphertext, autokeyCipherKeyString);
+                System.out.println("\n{Vigenere Cipher}\nCiphertext: "
+                        + ciphertext + "\nPlaintext: " + autokeyCipherOutput[0] +
+                        "\nPrimer: " + autokeyCipherOutput[1]);
                 break;
             default:
                 System.out.println("Error: Unable to find encryption method");
