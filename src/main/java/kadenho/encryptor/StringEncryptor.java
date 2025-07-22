@@ -91,8 +91,7 @@ public class StringEncryptor {
 
     }
 
-    private static int[] getCoprimes() {
-        int modulus = unscrambledAlphabet.length();
+    private static int[] getCoprimes(int modulus) {
         ArrayList<Integer> coprimes = new ArrayList<>();
         for (int i = 1; i < modulus; i++) { // Candidates for coprimes
             int greatestCommonDenominator = 0;
@@ -391,7 +390,7 @@ public class StringEncryptor {
                         "\nKey: " + caesarCipherOutput[1]);
                 break;
             case "Affine Cipher":
-                int[] coprimes = getCoprimes();
+                int[] coprimes = getCoprimes(unscrambledAlphabet.length());
                 int multiplicativeKey = retrieveFromIntegerList("Enter multiplicative key: ", coprimes);
                 int additiveKey = retrieveInteger("Enter additive key: ", 0, Integer.MAX_VALUE);
                 String[] affineCipherOutput = encryptAffineCipher(plaintext, multiplicativeKey, additiveKey);
@@ -444,7 +443,7 @@ public class StringEncryptor {
                         "\nKey: " + caesarCipherOutput[1]);
                 break;
             case "Affine Cipher":
-                int[] coprimes = getCoprimes();
+                int[] coprimes = getCoprimes(unscrambledAlphabet.length());
                 int multiplicativeKey = retrieveFromIntegerList("Enter multiplicative key: ", coprimes);
                 int additiveKey = retrieveInteger("Enter additive key: ", 0, Integer.MAX_VALUE);
                 String[] affineCipherOutput = decryptAffineCipher(ciphertext, multiplicativeKey, additiveKey);
