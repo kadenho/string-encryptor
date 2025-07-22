@@ -94,22 +94,18 @@ public class StringEncryptor {
     private static int[] getCoprimes() {
         int modulus = unscrambledAlphabet.length();
         ArrayList<Integer> coprimes = new ArrayList<>();
-        if (modulus == 0) {
-            return new int[modulus];
-        } else {
-            for (int i=1; i < modulus; i++) { // Candidates for coprimes
-                int greatestCommonDenominator = 0;
-                for (int j=1; j <= i; j++) { // Candidates for GCD
-                    if ((i % j == 0) && (modulus % j == 0)) {
-                        greatestCommonDenominator = j;
-                    }
-                }
-                if (greatestCommonDenominator == 1) {
-                    coprimes.add(i);
+        for (int i = 1; i < modulus; i++) { // Candidates for coprimes
+            int greatestCommonDenominator = 0;
+            for (int j = 1; j <= i; j++) { // Candidates for GCD
+                if ((i % j == 0) && (modulus % j == 0)) {
+                    greatestCommonDenominator = j;
                 }
             }
-            return coprimes.stream().mapToInt(Integer::intValue).toArray();
+            if (greatestCommonDenominator == 1) {
+                coprimes.add(i);
+            }
         }
+        return coprimes.stream().mapToInt(Integer::intValue).toArray();
     }
 
     public static int getModularMultiplicativeInverse(int multiplicative) {
