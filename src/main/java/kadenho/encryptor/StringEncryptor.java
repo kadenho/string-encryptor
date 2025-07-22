@@ -1,5 +1,6 @@
 package kadenho.encryptor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -87,6 +88,28 @@ public class StringEncryptor {
         }
         optionPromptBuilder.append("\n").append(enterPrompt);
         return optionPromptBuilder.toString();
+
+    }
+
+    private static int[] getCoprimes() {
+        int modulus = unscrambledAlphabet.length();
+        ArrayList<Integer> coprimes = new ArrayList<>();
+        if (modulus == 0) {
+            return new int[modulus];
+        } else {
+            for (int i=1; i < modulus; i++) { // Candidates for coprimes
+                int greatestCommonDenominator = 0;
+                for (int j=1; j <= i; j++) { // Candidates for GCD
+                    if ((i % j == 0) && (modulus % j == 0)) {
+                        greatestCommonDenominator = j;
+                    }
+                }
+                if (greatestCommonDenominator == 1) {
+                    coprimes.add(i);
+                }
+            }
+            return coprimes.stream().mapToInt(Integer::intValue).toArray();
+        }
     }
 
     public static String convertAlphabets(String plaintext, String currentAlphabet, String newAlphabet) {
@@ -338,8 +361,8 @@ public class StringEncryptor {
                         "\nKey: " + caesarCipherOutput[1]);
                 break;
             case "Affine Cipher":
-                int[] coprimesOfTwentySix = {1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25};
-                int multiplicativeKey = retrieveFromIntegerList("Enter multiplicative key: ", coprimesOfTwentySix);
+                int[] coprimes = getCoprimes();
+                int multiplicativeKey = retrieveFromIntegerList("Enter multiplicative key: ", coprimes);
                 int additiveKey = retrieveInteger("Enter additive key: ", 0, Integer.MAX_VALUE);
                 String[] affineCipherOutput = encryptAffineCipher(plaintext, multiplicativeKey, additiveKey);
                 System.out.println("\n{Affine Cipher}\nPlaintext: "
