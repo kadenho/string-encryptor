@@ -26,7 +26,7 @@ Rivest-Shamir-Adleman: Planned
 ### Decryption methods:
 Atbash Transform: Complete \
 Caesar Cipher: Complete \
-Affine Cipher: In development \
+Affine Cipher: Complete \
 Mixed Alphabet Cipher: Complete \
 Vigenere Cipher: Complete \
 Autokey Cipher: Complete \
