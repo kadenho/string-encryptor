@@ -107,7 +107,7 @@ public class StringEncryptor {
         return coprimes.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    public static int getModularMultiplicativeInverse(int multiplicative) {
+    private static int getModularMultiplicativeInverse(int multiplicative) {
         Integer multiplicativeInverse = null;
         int multiplicativeInverseCandidate = 0;
         while (multiplicativeInverse == null) {
