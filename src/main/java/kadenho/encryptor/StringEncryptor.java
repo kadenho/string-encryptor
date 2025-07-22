@@ -56,7 +56,7 @@ public class StringEncryptor {
             System.out.println("Invalid entry, must enter an integer");
             return retrieveFromIntegerList(prompt, integerOptions);
         }
-        if  (Arrays.stream(integerOptions).anyMatch(num -> num == retrievedEntry)) {
+        if (Arrays.stream(integerOptions).anyMatch(num -> num == retrievedEntry)) {
             return retrievedEntry;
         } else {
             System.out.println("Invalid entry, not an available option");
@@ -182,7 +182,6 @@ public class StringEncryptor {
         return plaintextStringBuilder.toString();
     }
 
-
     public static String atbashTransform(String plaintext) {
         StringBuilder ciphertextStringBuilder = new StringBuilder();
         for (char character : plaintext.toCharArray()) {
@@ -199,7 +198,6 @@ public class StringEncryptor {
         }
         return ciphertextStringBuilder.toString();
     }
-
 
     public static String[] encryptCaesarCipher(String plaintext, int shiftKey) {
         StringBuilder ciphertextStringBuilder = new StringBuilder();
@@ -267,7 +265,7 @@ public class StringEncryptor {
                 if (unscrambledCharacterIndex < 0) {
                     unscrambledCharacterIndex += alphabetLength;
                 }
-                char unscrambledCharacter =  unscrambledAlphabet.charAt(unscrambledCharacterIndex);
+                char unscrambledCharacter = unscrambledAlphabet.charAt(unscrambledCharacterIndex);
                 if (Character.isUpperCase(character)) {
                     unscrambledCharacter = Character.toUpperCase(unscrambledCharacter);
                 }
@@ -330,12 +328,12 @@ public class StringEncryptor {
 
     public static String[] encryptVigenereCipher(String plaintext, String keyString) {
         String lengthenedKeyString = constructVigenereLengthenedKeyString(plaintext, keyString);
-        return new String[] {encryptPolyAlphabetically(plaintext, lengthenedKeyString), keyString};
+        return new String[]{encryptPolyAlphabetically(plaintext, lengthenedKeyString), keyString};
     }
 
     public static String[] decryptVigenereCipher(String ciphertext, String keyString) {
         String lengthenedKeyString = constructVigenereLengthenedKeyString(ciphertext, keyString);
-        return new String[] {decryptPolyAlphabetically(ciphertext, lengthenedKeyString), keyString};
+        return new String[]{decryptPolyAlphabetically(ciphertext, lengthenedKeyString), keyString};
     }
 
     public static String[] encryptAutokeyCipher(String plaintext, String keyString) {
@@ -347,7 +345,7 @@ public class StringEncryptor {
             pointer++;
         }
         String lengthenedKeyString = lengthenedKeyStringBuilder.toString();
-        return new String[] {encryptPolyAlphabetically(plaintext, lengthenedKeyString), keyString};
+        return new String[]{encryptPolyAlphabetically(plaintext, lengthenedKeyString), keyString};
     }
 
     public static String[] decryptAutokeyCipher(String ciphertext, String keyString) {
@@ -373,7 +371,7 @@ public class StringEncryptor {
                 plaintextStringbuilder.append(character);
             }
         }
-        return new String[] {plaintextStringbuilder.toString(), keyString};
+        return new String[]{plaintextStringbuilder.toString(), keyString};
     }
 
     private static void encryptString() {
