@@ -1,9 +1,9 @@
 # string-encryptor
 Developed on Oracle OpenJDK 24.0.1 \
 Authored by Kaden Ho \
-In development as of: 07/15/25
+Development paused as of: 08/09/25
 ## Status:
-➖ Development in progress.
+⏭ Development paused.
 
 ## Operation:
 
