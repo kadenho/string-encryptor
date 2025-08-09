@@ -18,7 +18,6 @@ Affine Cipher: Complete \
 Mixed Alphabet Cipher: Complete \
 Vigenere Cipher: Complete \
 Autokey Cipher: Complete \
-XOR Cipher: Planned \
 Blowfish: Planned \
 Twofish: Planned \
 Advanced Encryption Standard: Planned \
@@ -31,7 +30,6 @@ Affine Cipher: Complete \
 Mixed Alphabet Cipher: Complete \
 Vigenere Cipher: Complete \
 Autokey Cipher: Complete \
-XOR Cipher: Planned \
 Blowfish: Planned \
 Twofish: Planned \
 Advanced Encryption Standard: Planned \
