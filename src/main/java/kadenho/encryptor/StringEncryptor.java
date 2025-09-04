@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class StringEncryptor {
     public static final Scanner scanner = new Scanner(System.in);
-    public static final String unscrambledAlphabet = "abcdefghijklmnopqrstuvwxyz";
-    public static final String[] availableEncryptionMethods = {"Atbash Transform", "Caesar Cipher",
+    public static final String UNSCRAMBLED_ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+    public static final String[] AVAILABLE_ENCRYPTION_METHODS = {"Atbash Transform", "Caesar Cipher",
             "Affine Cipher", "Mixed Alphabet Cipher", "Vigenere Cipher", "Autokey Cipher"};
 
     public static String retrieveString(String prompt, Boolean alphabetOnly) {
@@ -71,8 +71,8 @@ public class StringEncryptor {
     }
 
     public static String retrieveEncryptionMethod() {
-        String encryptionMethodPrompt = buildOptionsPromptList(availableEncryptionMethods, "Enter encryption method: ");
-        return availableEncryptionMethods[retrieveInteger(encryptionMethodPrompt, 1, availableEncryptionMethods.length) - 1];
+        String encryptionMethodPrompt = buildOptionsPromptList(AVAILABLE_ENCRYPTION_METHODS, "Enter encryption method: ");
+        return AVAILABLE_ENCRYPTION_METHODS[retrieveInteger(encryptionMethodPrompt, 1, AVAILABLE_ENCRYPTION_METHODS.length) - 1];
     }
 
     public static String retrieveRunAgainDecision() {
@@ -111,7 +111,7 @@ public class StringEncryptor {
         Integer multiplicativeInverse = null;
         int multiplicativeInverseCandidate = 0;
         while (multiplicativeInverse == null) {
-            if ((multiplicativeInverseCandidate * multiplicative) % unscrambledAlphabet.length() == 1) {
+            if ((multiplicativeInverseCandidate * multiplicative) % UNSCRAMBLED_ALPHABET.length() == 1) {
                 multiplicativeInverse = multiplicativeInverseCandidate;
             } else {
                 multiplicativeInverseCandidate++;
@@ -141,11 +141,11 @@ public class StringEncryptor {
         int pointer = 0;
         StringBuilder ciphertextStringBuilder = new StringBuilder();
         for (char character : plaintext.toCharArray()) {
-            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
-                int indexShift = unscrambledAlphabet.indexOf(Character.toLowerCase(lengthenedKeyString.charAt(pointer)));
+                int indexShift = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(lengthenedKeyString.charAt(pointer)));
                 pointer++;
-                char scrambledCharacter = unscrambledAlphabet.charAt((characterIndex + indexShift) % unscrambledAlphabet.length());
+                char scrambledCharacter = UNSCRAMBLED_ALPHABET.charAt((characterIndex + indexShift) % UNSCRAMBLED_ALPHABET.length());
                 if (Character.isUpperCase(character)) {
                     scrambledCharacter = Character.toUpperCase(scrambledCharacter);
                 }
@@ -161,15 +161,15 @@ public class StringEncryptor {
         int pointer = 0;
         StringBuilder plaintextStringBuilder = new StringBuilder();
         for (char character : ciphertext.toCharArray()) {
-            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
-                int indexShift = unscrambledAlphabet.indexOf(Character.toLowerCase(lengthenedKeyString.charAt(pointer)));
+                int indexShift = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(lengthenedKeyString.charAt(pointer)));
                 int newIndex = characterIndex - indexShift;
                 if (newIndex < 0) {
-                    newIndex += unscrambledAlphabet.length();
+                    newIndex += UNSCRAMBLED_ALPHABET.length();
                 }
                 pointer++;
-                char unscrambledCharacter = unscrambledAlphabet.charAt(newIndex);
+                char unscrambledCharacter = UNSCRAMBLED_ALPHABET.charAt(newIndex);
                 if (Character.isUpperCase(character)) {
                     unscrambledCharacter = Character.toUpperCase(unscrambledCharacter);
                 }
@@ -184,9 +184,9 @@ public class StringEncryptor {
     public static String atbashTransform(String plaintext) {
         StringBuilder ciphertextStringBuilder = new StringBuilder();
         for (char character : plaintext.toCharArray()) {
-            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
-                char scrambledCharacter = unscrambledAlphabet.charAt((unscrambledAlphabet.length() - 1) - characterIndex);
+                char scrambledCharacter = UNSCRAMBLED_ALPHABET.charAt((UNSCRAMBLED_ALPHABET.length() - 1) - characterIndex);
                 if (Character.isUpperCase(character)) {
                     scrambledCharacter = Character.toUpperCase(scrambledCharacter);
                 }
@@ -201,9 +201,9 @@ public class StringEncryptor {
     public static String[] encryptCaesarCipher(String plaintext, int shiftKey) {
         StringBuilder ciphertextStringBuilder = new StringBuilder();
         for (char character : plaintext.toCharArray()) {
-            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
-                char scrambledCharacter = unscrambledAlphabet.charAt((characterIndex + shiftKey) % unscrambledAlphabet.length());
+                char scrambledCharacter = UNSCRAMBLED_ALPHABET.charAt((characterIndex + shiftKey) % UNSCRAMBLED_ALPHABET.length());
                 if (Character.isUpperCase(character)) {
                     scrambledCharacter = Character.toUpperCase(scrambledCharacter);
                 }
@@ -218,11 +218,11 @@ public class StringEncryptor {
 
     public static String[] decryptCaesarCipher(String ciphertext, int shiftKey) {
         StringBuilder plaintextStringBuilder = new StringBuilder();
-        int offsetShift = unscrambledAlphabet.length() - shiftKey;
+        int offsetShift = UNSCRAMBLED_ALPHABET.length() - shiftKey;
         for (char character : ciphertext.toCharArray()) {
-            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
-                char scrambledCharacter = unscrambledAlphabet.charAt((characterIndex + offsetShift) % unscrambledAlphabet.length());
+                char scrambledCharacter = UNSCRAMBLED_ALPHABET.charAt((characterIndex + offsetShift) % UNSCRAMBLED_ALPHABET.length());
                 if (Character.isUpperCase(character)) {
                     scrambledCharacter = Character.toUpperCase(scrambledCharacter);
                 }
@@ -238,9 +238,9 @@ public class StringEncryptor {
     public static String[] encryptAffineCipher(String plaintext, int multiplicativeKey, int additiveKey) {
         StringBuilder ciphertextStringBuilder = new StringBuilder();
         for (char character : plaintext.toCharArray()) {
-            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
-                char scrambledCharacter = unscrambledAlphabet.charAt(((multiplicativeKey * characterIndex) + additiveKey) % unscrambledAlphabet.length());
+                char scrambledCharacter = UNSCRAMBLED_ALPHABET.charAt(((multiplicativeKey * characterIndex) + additiveKey) % UNSCRAMBLED_ALPHABET.length());
                 if (Character.isUpperCase(character)) {
                     scrambledCharacter = Character.toUpperCase(scrambledCharacter);
                 }
@@ -255,16 +255,16 @@ public class StringEncryptor {
 
     public static String[] decryptAffineCipher(String ciphertext, int multiplicativeKey, int additiveKey) {
         int multiplicativeInverse = getModularMultiplicativeInverse(multiplicativeKey);
-        int alphabetLength = unscrambledAlphabet.length();
+        int alphabetLength = UNSCRAMBLED_ALPHABET.length();
         StringBuilder plaintextStringBuilder = new StringBuilder();
         for (char character : ciphertext.toCharArray()) {
-            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
                 int unscrambledCharacterIndex = ((characterIndex - additiveKey) * multiplicativeInverse) % alphabetLength;
                 if (unscrambledCharacterIndex < 0) {
                     unscrambledCharacterIndex += alphabetLength;
                 }
-                char unscrambledCharacter = unscrambledAlphabet.charAt(unscrambledCharacterIndex);
+                char unscrambledCharacter = UNSCRAMBLED_ALPHABET.charAt(unscrambledCharacterIndex);
                 if (Character.isUpperCase(character)) {
                     unscrambledCharacter = Character.toUpperCase(unscrambledCharacter);
                 }
@@ -284,13 +284,13 @@ public class StringEncryptor {
                 scrambledAlphabetStringBuilder.append(Character.toLowerCase(character));
             }
         }
-        for (char character : unscrambledAlphabet.toCharArray()) {
+        for (char character : UNSCRAMBLED_ALPHABET.toCharArray()) {
             if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1) {
                 scrambledAlphabetStringBuilder.append(Character.toLowerCase(character));
             }
         }
         String scrambledAlphabet = scrambledAlphabetStringBuilder.toString();
-        String ciphertext = convertAlphabets(plaintext, unscrambledAlphabet, scrambledAlphabet);
+        String ciphertext = convertAlphabets(plaintext, UNSCRAMBLED_ALPHABET, scrambledAlphabet);
         return new String[]{ciphertext, keyString};
     }
 
@@ -301,13 +301,13 @@ public class StringEncryptor {
                 scrambledAlphabetStringBuilder.append(Character.toLowerCase(character));
             }
         }
-        for (char character : unscrambledAlphabet.toCharArray()) {
+        for (char character : UNSCRAMBLED_ALPHABET.toCharArray()) {
             if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1) {
                 scrambledAlphabetStringBuilder.append(Character.toLowerCase(character));
             }
         }
         String scrambledAlphabet = scrambledAlphabetStringBuilder.toString();
-        String plaintext = convertAlphabets(ciphertext, scrambledAlphabet, unscrambledAlphabet);
+        String plaintext = convertAlphabets(ciphertext, scrambledAlphabet, UNSCRAMBLED_ALPHABET);
         return new String[]{plaintext, keyString};
     }
 
@@ -352,15 +352,15 @@ public class StringEncryptor {
         StringBuilder decryptionKey = new StringBuilder(keyString);
         StringBuilder plaintextStringbuilder = new StringBuilder();
         for (char character : ciphertext.toCharArray()) {
-            int characterIndex = unscrambledAlphabet.indexOf(Character.toLowerCase(character));
+            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
-                int indexShift = unscrambledAlphabet.indexOf(Character.toLowerCase(decryptionKey.charAt(pointer)));
+                int indexShift = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(decryptionKey.charAt(pointer)));
                 int newIndex = characterIndex - indexShift;
                 if (newIndex < 0) {
-                    newIndex += unscrambledAlphabet.length();
+                    newIndex += UNSCRAMBLED_ALPHABET.length();
                 }
                 pointer++;
-                char unscrambledCharacter = unscrambledAlphabet.charAt(newIndex);
+                char unscrambledCharacter = UNSCRAMBLED_ALPHABET.charAt(newIndex);
                 decryptionKey.append(unscrambledCharacter);
                 if (Character.isUpperCase(character)) {
                     unscrambledCharacter = Character.toUpperCase(unscrambledCharacter);
@@ -390,7 +390,7 @@ public class StringEncryptor {
                         "\nKey: " + caesarCipherOutput[1]);
                 break;
             case "Affine Cipher":
-                int[] coprimes = getCoprimes(unscrambledAlphabet.length());
+                int[] coprimes = getCoprimes(UNSCRAMBLED_ALPHABET.length());
                 int multiplicativeKey = retrieveFromIntegerList("Enter multiplicative key: ", coprimes);
                 int additiveKey = retrieveInteger("Enter additive key: ", 0, Integer.MAX_VALUE);
                 String[] affineCipherOutput = encryptAffineCipher(plaintext, multiplicativeKey, additiveKey);
@@ -443,7 +443,7 @@ public class StringEncryptor {
                         "\nKey: " + caesarCipherOutput[1]);
                 break;
             case "Affine Cipher":
-                int[] coprimes = getCoprimes(unscrambledAlphabet.length());
+                int[] coprimes = getCoprimes(UNSCRAMBLED_ALPHABET.length());
                 int multiplicativeKey = retrieveFromIntegerList("Enter multiplicative key: ", coprimes);
                 int additiveKey = retrieveInteger("Enter additive key: ", 0, Integer.MAX_VALUE);
                 String[] affineCipherOutput = decryptAffineCipher(ciphertext, multiplicativeKey, additiveKey);
