@@ -107,19 +107,6 @@ public class StringEncryptor {
         return coprimes.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    private static int getModularMultiplicativeInverse(int multiplicative) {
-        Integer multiplicativeInverse = null;
-        int multiplicativeInverseCandidate = 0;
-        while (multiplicativeInverse == null) {
-            if ((multiplicativeInverseCandidate * multiplicative) % UNSCRAMBLED_ALPHABET.length() == 1) {
-                multiplicativeInverse = multiplicativeInverseCandidate;
-            } else {
-                multiplicativeInverseCandidate++;
-            }
-        }
-        return multiplicativeInverse;
-    }
-
     public static String convertAlphabets(String plaintext, String currentAlphabet, String newAlphabet) {
         StringBuilder ciphertextStringBuilder = new StringBuilder();
         for (char character : plaintext.toCharArray()) {
@@ -179,48 +166,6 @@ public class StringEncryptor {
             }
         }
         return plaintextStringBuilder.toString();
-    }
-
-    public static String[] encryptAffineCipher(String plaintext, int multiplicativeKey, int additiveKey) {
-        StringBuilder ciphertextStringBuilder = new StringBuilder();
-        for (char character : plaintext.toCharArray()) {
-            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
-            if (characterIndex >= 0) {
-                char scrambledCharacter = UNSCRAMBLED_ALPHABET.charAt(((multiplicativeKey * characterIndex) + additiveKey) % UNSCRAMBLED_ALPHABET.length());
-                if (Character.isUpperCase(character)) {
-                    scrambledCharacter = Character.toUpperCase(scrambledCharacter);
-                }
-                ciphertextStringBuilder.append(scrambledCharacter);
-            } else {
-                ciphertextStringBuilder.append(character);
-            }
-        }
-        String ciphertext = ciphertextStringBuilder.toString();
-        return new String[]{ciphertext, Integer.toString(multiplicativeKey), Integer.toString(additiveKey)};
-    }
-
-    public static String[] decryptAffineCipher(String ciphertext, int multiplicativeKey, int additiveKey) {
-        int multiplicativeInverse = getModularMultiplicativeInverse(multiplicativeKey);
-        int alphabetLength = UNSCRAMBLED_ALPHABET.length();
-        StringBuilder plaintextStringBuilder = new StringBuilder();
-        for (char character : ciphertext.toCharArray()) {
-            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
-            if (characterIndex >= 0) {
-                int unscrambledCharacterIndex = ((characterIndex - additiveKey) * multiplicativeInverse) % alphabetLength;
-                if (unscrambledCharacterIndex < 0) {
-                    unscrambledCharacterIndex += alphabetLength;
-                }
-                char unscrambledCharacter = UNSCRAMBLED_ALPHABET.charAt(unscrambledCharacterIndex);
-                if (Character.isUpperCase(character)) {
-                    unscrambledCharacter = Character.toUpperCase(unscrambledCharacter);
-                }
-                plaintextStringBuilder.append(unscrambledCharacter);
-            } else {
-                plaintextStringBuilder.append(character);
-            }
-        }
-        String plaintext = plaintextStringBuilder.toString();
-        return new String[]{plaintext, Integer.toString(multiplicativeKey), Integer.toString(additiveKey)};
     }
 
     public static String[] encryptMixedAlphabetCipher(String plaintext, String keyString) {
@@ -339,7 +284,7 @@ public class StringEncryptor {
                 int[] coprimes = getCoprimes(UNSCRAMBLED_ALPHABET.length());
                 int multiplicativeKey = retrieveFromIntegerList("Enter multiplicative key: ", coprimes);
                 int additiveKey = retrieveInteger("Enter additive key: ", 0, Integer.MAX_VALUE);
-                String[] affineCipherOutput = encryptAffineCipher(plaintext, multiplicativeKey, additiveKey);
+                String[] affineCipherOutput = AffineCipher.encrypt(plaintext, multiplicativeKey, additiveKey);
                 System.out.println("\n{Affine Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + affineCipherOutput[0] +
                         "\nMultiplicative key: " + affineCipherOutput[1] +
@@ -392,7 +337,7 @@ public class StringEncryptor {
                 int[] coprimes = getCoprimes(UNSCRAMBLED_ALPHABET.length());
                 int multiplicativeKey = retrieveFromIntegerList("Enter multiplicative key: ", coprimes);
                 int additiveKey = retrieveInteger("Enter additive key: ", 0, Integer.MAX_VALUE);
-                String[] affineCipherOutput = decryptAffineCipher(ciphertext, multiplicativeKey, additiveKey);
+                String[] affineCipherOutput = AffineCipher.decrypt(ciphertext, multiplicativeKey, additiveKey);
                 System.out.println("\n{Affine Cipher}\nCiphertext: "
                         + ciphertext + "\nPlaintext: " + affineCipherOutput[0] +
                         "\nMultiplicative key: " + affineCipherOutput[1] +
