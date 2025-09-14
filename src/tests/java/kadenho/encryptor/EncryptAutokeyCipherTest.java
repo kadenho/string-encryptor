@@ -9,7 +9,7 @@ public class EncryptAutokeyCipherTest {
     public void lowercaseTextLowercaseShorterKey() {
         String plaintext = "pepperoni";
         String[] expectedOutput = {"emooegscx", "pizza"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "pizza");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "pizza");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -17,7 +17,7 @@ public class EncryptAutokeyCipherTest {
     public void lowercaseTextMixcaseShorterKey() {
         String plaintext = "panfriedsalmon";
         String[] expectedOutput = {"nuzrpxeqxrtqrf", "Yummy"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "Yummy");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "Yummy");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -25,7 +25,7 @@ public class EncryptAutokeyCipherTest {
     public void mixcaseTextLowercaseShorterKey() {
         String plaintext = "FiletMignon";
         String[] expectedOutput = {"XbpedEnoysg", "steaks"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "steaks");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "steaks");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -33,7 +33,7 @@ public class EncryptAutokeyCipherTest {
     public void mixcaseTextMixcaseShorterKey() {
         String plaintext = "ILoveCroutons";
         String[] expectedOutput = {"ALzvhKccpxqeg", "salad"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "salad");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "salad");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -41,7 +41,7 @@ public class EncryptAutokeyCipherTest {
     public void lowercaseSpacedTextLowercaseShorterKey() {
         String plaintext = "i love the album immunity";
         String[] expectedOutput = {"j lunm evz eeiym tnggvufs", "bags"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "bags");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "bags");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -49,7 +49,7 @@ public class EncryptAutokeyCipherTest {
     public void lowercaseSpacedTextMixcaseShorterKey() {
         String plaintext = "i also really like sling";
         String[] expectedOutput = {"i mzwp rmawdm cmkp djtvq", "Amoeba"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "Amoeba");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "Amoeba");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -57,7 +57,7 @@ public class EncryptAutokeyCipherTest {
     public void mixcaseSpacedTextLowercaseShorterKey() {
         String plaintext = "But one of my favorite albums is definitely Charm";
         String[] expectedOutput = {"Hfh flx cy tc xnjkscms nppzyq ns yswqgmtpms Ozijp", "glorytothesnow"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "glorytothesnow");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "glorytothesnow");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -65,7 +65,7 @@ public class EncryptAutokeyCipherTest {
     public void mixcaseSpacedTextMixcaseShorterKey() {
         String plaintext = "There is a Shelly EP out that I like";
         String[] expectedOutput = {"Vysjw gg u Jtmyor LT fyb lhsa M wtii", "CrossYourMind"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "CrossYourMind");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "CrossYourMind");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -73,7 +73,7 @@ public class EncryptAutokeyCipherTest {
     public void lowercaseSpacedMixCharTextLowercaseShorterKey() {
         String plaintext = "my favorite brand of instant raman is...shin!";
         String[] expectedOutput = {"nm blhmwios sztre ff vqgyial kazte ie...suqf!", "bowl"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "bowl");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "bowl");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -81,7 +81,7 @@ public class EncryptAutokeyCipherTest {
     public void lowercaseSpacedMixCharTextMixcaseShorterKey() {
         String plaintext = "i wish songs were longer! i hate when a song is only 2-minutes. at least 3 minutes is better.";
         String[] expectedOutput = {"j wtdh vwjok dwfr rgjkvv! t vnzi npln t wkuk vs gbye 2-uabhece. ig fxekt 3 ftrulxe qf vxxlmj.", "Ballad"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "Ballad");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "Ballad");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -89,7 +89,7 @@ public class EncryptAutokeyCipherTest {
     public void mixcaseSpacedMixCharTextLowercaseShorterKey() {
         String plaintext = "Clairo, Beabadoobee, Laufey, Sabrina Carpenter, and Suki Waterhouse are my favorite singers!";
         String[] expectedOutput = {"Eznkvf, Uglbiucpfef, Lditfc, Wlblnry Uasgmatgr, rch Fnoz Wnwwlrwqsx eil as xevfvurj sdbxmkw!", "concert"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "concert");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "concert");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -97,7 +97,7 @@ public class EncryptAutokeyCipherTest {
     public void mixcaseSpacedMixCharTextMixcaseShorterKey() {
         String plaintext = "I want to live in Chicago! I love the big city feel while still being near home.";
         String[] expectedOutput = {"Q hlvg hw dqre vg Vvtkvkw! V nvdg tns jtu xmmf jfmr ypbjj wxths jpmfz vpls lwzk.", "Illinois"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "Illinois");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "Illinois");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -105,7 +105,7 @@ public class EncryptAutokeyCipherTest {
     public void lowercaseTextLowercaseLongerKey() {
         String plaintext = "hello";
         String[] expectedOutput = {"nvpph", "greetings"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "greetings");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "greetings");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -113,7 +113,7 @@ public class EncryptAutokeyCipherTest {
     public void lowercaseTextMixcaseLongerKey() {
         String plaintext = "piano";
         String[] expectedOutput = {"uwrgw", "FORTISSIMO"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "FORTISSIMO");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "FORTISSIMO");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -121,7 +121,7 @@ public class EncryptAutokeyCipherTest {
     public void mixcaseTextLowercaseLongerKey() {
         String plaintext = "Duck";
         String[] expectedOutput = {"Sypq", "penguin"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "penguin");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "penguin");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -129,7 +129,7 @@ public class EncryptAutokeyCipherTest {
     public void mixcaseTextMixcaseLongerKey() {
         String plaintext = "Bread";
         String[] expectedOutput = {"Tfyrg", "SourDough"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "SourDough");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "SourDough");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -137,7 +137,7 @@ public class EncryptAutokeyCipherTest {
     public void lowercaseSpacedTextLowercaseLongerKey() {
         String plaintext = "hi mom";
         String[] expectedOutput = {"pu abf", "imonthetv"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "imonthetv");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "imonthetv");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -145,7 +145,7 @@ public class EncryptAutokeyCipherTest {
     public void lowercaseSpacedTextMixcaseLongerKey() {
         String plaintext = "the library";
         String[] expectedOutput = {"hme wmyrnup", "ofAlexandria"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "ofAlexandria");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "ofAlexandria");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -153,7 +153,7 @@ public class EncryptAutokeyCipherTest {
     public void mixcaseSpacedTextLowercaseLongerKey() {
         String plaintext = "The Old Guard";
         String[] expectedOutput = {"Ehz Wpl Rfexd", "lavieillegarde"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "lavieillegarde");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "lavieillegarde");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -161,7 +161,7 @@ public class EncryptAutokeyCipherTest {
     public void mixcaseSpacedTextMixcaseLongerKey() {
         String plaintext = "University of Nebraska Omaha";
         String[] expectedOutput = {"Numprznmkq wy Lsgeetba Gwasi", "TheUniversityOfNebraskaLincoln"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "TheUniversityOfNebraskaLincoln");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "TheUniversityOfNebraskaLincoln");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -169,7 +169,7 @@ public class EncryptAutokeyCipherTest {
     public void lowercaseSpacedMixCharTextLowercaseLongerKey() {
         String plaintext = "i love bacon!";
         String[] expectedOutput = {"j fhdp jkgdn!", "butilikepancakestoo"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "butilikepancakestoo");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "butilikepancakestoo");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -177,7 +177,7 @@ public class EncryptAutokeyCipherTest {
     public void lowercaseSpacedMixCharTextMixcaseLongerKey() {
         String plaintext = "its a me, mario!";
         String[] expectedOutput = {"igv h uw, nrfbv!", "AndHisBrotherLuigi"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "AndHisBrotherLuigi");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "AndHisBrotherLuigi");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -185,7 +185,7 @@ public class EncryptAutokeyCipherTest {
     public void mixcaseSpacedMixCharTextLowercaseLongerKey() {
         String plaintext = "My favorite game:";
         String[] expectedOutput = {"Dc idzouzxh kmbx:", "reddeadredemptiontwo"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "reddeadredemptiontwo");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "reddeadredemptiontwo");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -193,7 +193,7 @@ public class EncryptAutokeyCipherTest {
     public void mixcaseSpacedMixCharTextMixcaseLongerKey() {
         String plaintext = "32GB DDR4 RAM!";
         String[] expectedOutput = {"32OO HHU4 KOG!", "INeedToUpgrade"};
-        String[] actualOutput = StringEncryptor.encryptAutokeyCipher(plaintext, "INeedToUpgrade");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "INeedToUpgrade");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 }
