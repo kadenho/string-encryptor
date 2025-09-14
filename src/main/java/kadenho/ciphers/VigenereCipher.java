@@ -1,7 +1,7 @@
-package kadenho.encryptor;
+package kadenho.ciphers;
 
-import static kadenho.encryptor.CipherUtils.decryptPolyAlphabetically;
-import static kadenho.encryptor.CipherUtils.encryptPolyAlphabetically;
+import static kadenho.ciphers.CipherUtils.decryptPolyAlphabetically;
+import static kadenho.ciphers.CipherUtils.encryptPolyAlphabetically;
 
 public class VigenereCipher {
     public static String[] encrypt(String plaintext, String keyString) {

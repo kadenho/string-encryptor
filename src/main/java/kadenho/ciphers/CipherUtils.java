@@ -1,4 +1,4 @@
-package kadenho.encryptor;
+package kadenho.ciphers;
 
 public class CipherUtils {
     public static final String UNSCRAMBLED_ALPHABET = "abcdefghijklmnopqrstuvwxyz";

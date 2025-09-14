@@ -1,7 +1,7 @@
-package kadenho.encryptor;
+package kadenho.ciphers;
 
-import static kadenho.encryptor.CipherUtils.UNSCRAMBLED_ALPHABET;
-import static kadenho.encryptor.CipherUtils.convertAlphabets;
+import static kadenho.ciphers.CipherUtils.UNSCRAMBLED_ALPHABET;
+import static kadenho.ciphers.CipherUtils.convertAlphabets;
 
 public class MixedAlphabetCipher {
     public static String[] encrypt(String plaintext, String keyString) {

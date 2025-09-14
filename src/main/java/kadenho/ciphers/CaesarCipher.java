@@ -1,8 +1,8 @@
-package kadenho.encryptor;
+package kadenho.ciphers;
 
 import org.jetbrains.annotations.NotNull;
 
-import static kadenho.encryptor.CipherUtils.UNSCRAMBLED_ALPHABET;
+import static kadenho.ciphers.CipherUtils.UNSCRAMBLED_ALPHABET;
 
 public class CaesarCipher {
     public static String[] encrypt(String plaintext, int shiftKey) {

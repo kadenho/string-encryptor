@@ -1,4 +1,4 @@
-package kadenho.encryptor;
+package kadenho.ciphers;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

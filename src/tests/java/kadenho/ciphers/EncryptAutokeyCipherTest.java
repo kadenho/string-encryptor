@@ -1,103 +1,103 @@
-package kadenho.encryptor;
+package kadenho.ciphers;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-public class EncryptVigenereCipherTest {
+public class EncryptAutokeyCipherTest {
     @Test
     public void lowercaseTextLowercaseShorterKey() {
         String plaintext = "pepperoni";
-        String[] expectedOutput = {"emooegwmh", "pizza"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "pizza");
+        String[] expectedOutput = {"emooegscx", "pizza"};
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "pizza");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
     @Test
     public void lowercaseTextMixcaseShorterKey() {
         String plaintext = "panfriedsalmon";
-        String[] expectedOutput = {"nuzrpgypeyjgaz", "Yummy"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "Yummy");
+        String[] expectedOutput = {"nuzrpxeqxrtqrf", "Yummy"};
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "Yummy");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
     @Test
     public void mixcaseTextLowercaseShorterKey() {
         String plaintext = "FiletMignon";
-        String[] expectedOutput = {"XbpedEazrox", "steaks"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "steaks");
+        String[] expectedOutput = {"XbpedEnoysg", "steaks"};
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "steaks");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
     @Test
     public void mixcaseTextMixcaseShorterKey() {
         String plaintext = "ILoveCroutons";
-        String[] expectedOutput = {"ALzvhUrzuwgnd", "salad"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "salad");
+        String[] expectedOutput = {"ALzvhKccpxqeg", "salad"};
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "salad");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
     @Test
     public void lowercaseSpacedTextLowercaseShorterKey() {
         String plaintext = "i love the album immunity";
-        String[] expectedOutput = {"j lunf tnw blhmn isevnolz", "bags"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "bags");
+        String[] expectedOutput = {"j lunm evz eeiym tnggvufs", "bags"};
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "bags");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
     @Test
     public void lowercaseSpacedTextMixcaseShorterKey() {
         String plaintext = "i also really like sling";
-        String[] expectedOutput = {"i mzwp remzpz liws wmins", "Amoeba"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "Amoeba");
+        String[] expectedOutput = {"i mzwp rmawdm cmkp djtvq", "Amoeba"};
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "Amoeba");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
     @Test
     public void mixcaseSpacedTextLowercaseShorterKey() {
         String plaintext = "But one of my favorite albums is definitely Charm";
-        String[] expectedOutput = {"Hfh flx cy tc xnjkxthv yepntw af raltbzrxzr Jlsea", "glorytothesnow"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "glorytothesnow");
+        String[] expectedOutput = {"Hfh flx cy tc xnjkscms nppzyq ns yswqgmtpms Ozijp", "glorytothesnow"};
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "glorytothesnow");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
     @Test
     public void mixcaseSpacedTextMixcaseShorterKey() {
         String plaintext = "There is a Shelly EP out that I like";
-        String[] expectedOutput = {"Vysjw gg u Jtmyoa VD gmr hbrf Q ylmv", "CrossYourMind"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "CrossYourMind");
+        String[] expectedOutput = {"Vysjw gg u Jtmyor LT fyb lhsa M wtii", "CrossYourMind"};
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "CrossYourMind");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
     @Test
     public void lowercaseSpacedMixCharTextLowercaseShorterKey() {
         String plaintext = "my favorite brand of instant raman is...shin!";
-        String[] expectedOutput = {"nm blwcntus xcbbz zg wjduoje soilo wo...diwj!", "bowl"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "bowl");
+        String[] expectedOutput = {"nm blhmwios sztre ff vqgyial kazte ie...suqf!", "bowl"};
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "bowl");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
     @Test
     public void lowercaseSpacedMixCharTextMixcaseShorterKey() {
         String plaintext = "i wish songs were longer! i hate when a song is only 2-minutes. at least 3 minutes is better.";
-        String[] expectedOutput = {"j wtdh vpnrd whse wznjfr! t sawf wspn d toyr iv pnwj 2-mloueps. du lplsw 3 niyftht id mewuec.", "Ballad"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "Ballad");
+        String[] expectedOutput = {"j wtdh vwjok dwfr rgjkvv! t vnzi npln t wkuk vs gbye 2-uabhece. ig fxekt 3 ftrulxe qf vxxlmj.", "Ballad"};
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "Ballad");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
     @Test
     public void mixcaseSpacedMixCharTextLowercaseShorterKey() {
         String plaintext = "Clairo, Beabadoobee, Laufey, Sabrina Carpenter, and Suki Waterhouse are my favorite singers!";
-        String[] expectedOutput = {"Eznkvf, Ugoochfhdsr, Nelygm, Fcfibpo Pcvgxphrt, eew Uixk Armgfuqyjx cfr oc wtxcekxv lkbtgvj!", "concert"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "concert");
+        String[] expectedOutput = {"Eznkvf, Uglbiucpfef, Lditfc, Wlblnry Uasgmatgr, rch Fnoz Wnwwlrwqsx eil as xevfvurj sdbxmkw!", "concert"};
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "concert");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
     @Test
     public void mixcaseSpacedMixCharTextMixcaseShorterKey() {
         String plaintext = "I want to live in Chicago! I love the big city feel while still being near home.";
-        String[] expectedOutput = {"Q hlvg hw dqgp qa Qpaklrw! V zwnm esm owo uqej nrst optwm fhqdt mpqau vwic swzs.", "Illinois"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "Illinois");
+        String[] expectedOutput = {"Q hlvg hw dqre vg Vvtkvkw! V nvdg tns jtu xmmf jfmr ypbjj wxths jpmfz vpls lwzk.", "Illinois"};
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "Illinois");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -105,7 +105,7 @@ public class EncryptVigenereCipherTest {
     public void lowercaseTextLowercaseLongerKey() {
         String plaintext = "hello";
         String[] expectedOutput = {"nvpph", "greetings"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "greetings");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "greetings");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -113,7 +113,7 @@ public class EncryptVigenereCipherTest {
     public void lowercaseTextMixcaseLongerKey() {
         String plaintext = "piano";
         String[] expectedOutput = {"uwrgw", "FORTISSIMO"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "FORTISSIMO");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "FORTISSIMO");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -121,7 +121,7 @@ public class EncryptVigenereCipherTest {
     public void mixcaseTextLowercaseLongerKey() {
         String plaintext = "Duck";
         String[] expectedOutput = {"Sypq", "penguin"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "penguin");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "penguin");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -129,7 +129,7 @@ public class EncryptVigenereCipherTest {
     public void mixcaseTextMixcaseLongerKey() {
         String plaintext = "Bread";
         String[] expectedOutput = {"Tfyrg", "SourDough"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "SourDough");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "SourDough");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -137,7 +137,7 @@ public class EncryptVigenereCipherTest {
     public void lowercaseSpacedTextLowercaseLongerKey() {
         String plaintext = "hi mom";
         String[] expectedOutput = {"pu abf", "imonthetv"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "imonthetv");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "imonthetv");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -145,7 +145,7 @@ public class EncryptVigenereCipherTest {
     public void lowercaseSpacedTextMixcaseLongerKey() {
         String plaintext = "the library";
         String[] expectedOutput = {"hme wmyrnup", "ofAlexandria"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "ofAlexandria");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "ofAlexandria");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -153,7 +153,7 @@ public class EncryptVigenereCipherTest {
     public void mixcaseSpacedTextLowercaseLongerKey() {
         String plaintext = "The Old Guard";
         String[] expectedOutput = {"Ehz Wpl Rfexd", "lavieillegarde"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "lavieillegarde");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "lavieillegarde");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -161,7 +161,7 @@ public class EncryptVigenereCipherTest {
     public void mixcaseSpacedTextMixcaseLongerKey() {
         String plaintext = "University of Nebraska Omaha";
         String[] expectedOutput = {"Numprznmkq wy Lsgeetba Gwasi", "TheUniversityOfNebraskaLincoln"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "TheUniversityOfNebraskaLincoln");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "TheUniversityOfNebraskaLincoln");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -169,7 +169,7 @@ public class EncryptVigenereCipherTest {
     public void lowercaseSpacedMixCharTextLowercaseLongerKey() {
         String plaintext = "i love bacon!";
         String[] expectedOutput = {"j fhdp jkgdn!", "butilikepancakestoo"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "butilikepancakestoo");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "butilikepancakestoo");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -177,7 +177,7 @@ public class EncryptVigenereCipherTest {
     public void lowercaseSpacedMixCharTextMixcaseLongerKey() {
         String plaintext = "its a me, mario!";
         String[] expectedOutput = {"igv h uw, nrfbv!", "AndHisBrotherLuigi"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "AndHisBrotherLuigi");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "AndHisBrotherLuigi");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -185,7 +185,7 @@ public class EncryptVigenereCipherTest {
     public void mixcaseSpacedMixCharTextLowercaseLongerKey() {
         String plaintext = "My favorite game:";
         String[] expectedOutput = {"Dc idzouzxh kmbx:", "reddeadredemptiontwo"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "reddeadredemptiontwo");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "reddeadredemptiontwo");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 
@@ -193,7 +193,7 @@ public class EncryptVigenereCipherTest {
     public void mixcaseSpacedMixCharTextMixcaseLongerKey() {
         String plaintext = "32GB DDR4 RAM!";
         String[] expectedOutput = {"32OO HHU4 KOG!", "INeedToUpgrade"};
-        String[] actualOutput = VigenereCipher.encrypt(plaintext, "INeedToUpgrade");
+        String[] actualOutput = AutokeyCipher.encrypt(plaintext, "INeedToUpgrade");
         assertArrayEquals(expectedOutput, actualOutput);
     }
 }

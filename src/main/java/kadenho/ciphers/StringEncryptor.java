@@ -1,10 +1,10 @@
-package kadenho.encryptor;
+package kadenho.ciphers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static kadenho.encryptor.CipherUtils.UNSCRAMBLED_ALPHABET;
+import static kadenho.ciphers.CipherUtils.UNSCRAMBLED_ALPHABET;
 
 public class StringEncryptor {
     public static final Scanner scanner = new Scanner(System.in);

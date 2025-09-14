@@ -1,7 +1,7 @@
-package kadenho.encryptor;
+package kadenho.ciphers;
 
-import static kadenho.encryptor.CipherUtils.UNSCRAMBLED_ALPHABET;
-import static kadenho.encryptor.CipherUtils.encryptPolyAlphabetically;
+import static kadenho.ciphers.CipherUtils.UNSCRAMBLED_ALPHABET;
+import static kadenho.ciphers.CipherUtils.encryptPolyAlphabetically;
 
 public class AutokeyCipher {
     public static String[] encrypt(String plaintext, String keyString) {

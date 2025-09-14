@@ -1,6 +1,6 @@
-package kadenho.encryptor;
+package kadenho.ciphers;
 
-import static kadenho.encryptor.CipherUtils.UNSCRAMBLED_ALPHABET;
+import static kadenho.ciphers.CipherUtils.UNSCRAMBLED_ALPHABET;
 
 public class AtbashTransform {
 
