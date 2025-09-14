@@ -181,45 +181,6 @@ public class StringEncryptor {
         return plaintextStringBuilder.toString();
     }
 
-
-
-    public static String[] encryptCaesarCipher(String plaintext, int shiftKey) {
-        StringBuilder ciphertextStringBuilder = new StringBuilder();
-        for (char character : plaintext.toCharArray()) {
-            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
-            if (characterIndex >= 0) {
-                char scrambledCharacter = UNSCRAMBLED_ALPHABET.charAt((characterIndex + shiftKey) % UNSCRAMBLED_ALPHABET.length());
-                if (Character.isUpperCase(character)) {
-                    scrambledCharacter = Character.toUpperCase(scrambledCharacter);
-                }
-                ciphertextStringBuilder.append(scrambledCharacter);
-            } else {
-                ciphertextStringBuilder.append(character);
-            }
-        }
-        String ciphertext = ciphertextStringBuilder.toString();
-        return new String[]{ciphertext, Integer.toString(shiftKey)};
-    }
-
-    public static String[] decryptCaesarCipher(String ciphertext, int shiftKey) {
-        StringBuilder plaintextStringBuilder = new StringBuilder();
-        int offsetShift = UNSCRAMBLED_ALPHABET.length() - shiftKey;
-        for (char character : ciphertext.toCharArray()) {
-            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
-            if (characterIndex >= 0) {
-                char scrambledCharacter = UNSCRAMBLED_ALPHABET.charAt((characterIndex + offsetShift) % UNSCRAMBLED_ALPHABET.length());
-                if (Character.isUpperCase(character)) {
-                    scrambledCharacter = Character.toUpperCase(scrambledCharacter);
-                }
-                plaintextStringBuilder.append(scrambledCharacter);
-            } else {
-                plaintextStringBuilder.append(character);
-            }
-        }
-        String plaintext = plaintextStringBuilder.toString();
-        return new String[]{plaintext, Integer.toString(shiftKey)};
-    }
-
     public static String[] encryptAffineCipher(String plaintext, int multiplicativeKey, int additiveKey) {
         StringBuilder ciphertextStringBuilder = new StringBuilder();
         for (char character : plaintext.toCharArray()) {
@@ -369,7 +330,7 @@ public class StringEncryptor {
                 break;
             case "Caesar Cipher":
                 int caesarShiftKey = retrieveInteger("Enter key (1-25): ", 1, 25);
-                String[] caesarCipherOutput = encryptCaesarCipher(plaintext, caesarShiftKey);
+                String[] caesarCipherOutput = CaesarCipher.encrypt(plaintext, caesarShiftKey);
                 System.out.println("\n{Caesar Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + caesarCipherOutput[0] +
                         "\nKey: " + caesarCipherOutput[1]);
@@ -422,7 +383,7 @@ public class StringEncryptor {
                 break;
             case "Caesar Cipher":
                 int caesarShiftKey = retrieveInteger("Enter key (1-25): ", 1, 25);
-                String[] caesarCipherOutput = decryptCaesarCipher(ciphertext, caesarShiftKey);
+                String[] caesarCipherOutput = CaesarCipher.decrypt(ciphertext, caesarShiftKey);
                 System.out.println("\n{Caesar Cipher}\nCiphertext: "
                         + ciphertext + "\nPlaintext: " + caesarCipherOutput[0] +
                         "\nKey: " + caesarCipherOutput[1]);
