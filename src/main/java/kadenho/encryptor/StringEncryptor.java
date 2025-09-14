@@ -107,76 +107,6 @@ public class StringEncryptor {
         return coprimes.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    private static String encryptPolyAlphabetically(String plaintext, String lengthenedKeyString) {
-        int pointer = 0;
-        StringBuilder ciphertextStringBuilder = new StringBuilder();
-        for (char character : plaintext.toCharArray()) {
-            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
-            if (characterIndex >= 0) {
-                int indexShift = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(lengthenedKeyString.charAt(pointer)));
-                pointer++;
-                char scrambledCharacter = UNSCRAMBLED_ALPHABET.charAt((characterIndex + indexShift) % UNSCRAMBLED_ALPHABET.length());
-                if (Character.isUpperCase(character)) {
-                    scrambledCharacter = Character.toUpperCase(scrambledCharacter);
-                }
-                ciphertextStringBuilder.append(scrambledCharacter);
-            } else {
-                ciphertextStringBuilder.append(character);
-            }
-        }
-        return ciphertextStringBuilder.toString();
-    }
-
-    private static String decryptPolyAlphabetically(String ciphertext, String lengthenedKeyString) {
-        int pointer = 0;
-        StringBuilder plaintextStringBuilder = new StringBuilder();
-        for (char character : ciphertext.toCharArray()) {
-            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
-            if (characterIndex >= 0) {
-                int indexShift = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(lengthenedKeyString.charAt(pointer)));
-                int newIndex = characterIndex - indexShift;
-                if (newIndex < 0) {
-                    newIndex += UNSCRAMBLED_ALPHABET.length();
-                }
-                pointer++;
-                char unscrambledCharacter = UNSCRAMBLED_ALPHABET.charAt(newIndex);
-                if (Character.isUpperCase(character)) {
-                    unscrambledCharacter = Character.toUpperCase(unscrambledCharacter);
-                }
-                plaintextStringBuilder.append(unscrambledCharacter);
-            } else {
-                plaintextStringBuilder.append(character);
-            }
-        }
-        return plaintextStringBuilder.toString();
-    }
-
-
-
-    private static String constructVigenereLengthenedKeyString(String plaintext, String keyString) {
-        String filteredPlaintext = plaintext.replaceAll("[^a-zA-Z]", "");
-        StringBuilder lengthenedKeyStringBuilder = new StringBuilder();
-        int pointer = 0;
-        while (lengthenedKeyStringBuilder.length() < filteredPlaintext.length()) {
-            lengthenedKeyStringBuilder.append(keyString.charAt(pointer));
-            pointer++;
-            if (pointer == keyString.length()) {
-                pointer = 0;
-            }
-        }
-        return lengthenedKeyStringBuilder.toString();
-    }
-
-    public static String[] encryptVigenereCipher(String plaintext, String keyString) {
-        String lengthenedKeyString = constructVigenereLengthenedKeyString(plaintext, keyString);
-        return new String[]{encryptPolyAlphabetically(plaintext, lengthenedKeyString), keyString};
-    }
-
-    public static String[] decryptVigenereCipher(String ciphertext, String keyString) {
-        String lengthenedKeyString = constructVigenereLengthenedKeyString(ciphertext, keyString);
-        return new String[]{decryptPolyAlphabetically(ciphertext, lengthenedKeyString), keyString};
-    }
-
     public static String[] encryptAutokeyCipher(String plaintext, String keyString) {
         String filteredPlaintext = plaintext.replaceAll("[^a-zA-Z]", "");
         StringBuilder lengthenedKeyStringBuilder = new StringBuilder(keyString);
@@ -186,7 +116,7 @@ public class StringEncryptor {
             pointer++;
         }
         String lengthenedKeyString = lengthenedKeyStringBuilder.toString();
-        return new String[]{encryptPolyAlphabetically(plaintext, lengthenedKeyString), keyString};
+        return new String[]{CipherUtils.encryptPolyAlphabetically(plaintext, lengthenedKeyString), keyString};
     }
 
     public static String[] decryptAutokeyCipher(String ciphertext, String keyString) {
@@ -250,7 +180,7 @@ public class StringEncryptor {
                 break;
             case "Vigenere Cipher":
                 String vigenereCipherKeyString = retrieveString("Enter key: ", true);
-                String[] vigenereCipherOutput = encryptVigenereCipher(plaintext, vigenereCipherKeyString);
+                String[] vigenereCipherOutput = VigenereCipher.encrypt(plaintext, vigenereCipherKeyString);
                 System.out.println("\n{Vigenere Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + vigenereCipherOutput[0] +
                         "\nKey: " + vigenereCipherOutput[1]);
@@ -303,7 +233,7 @@ public class StringEncryptor {
                 break;
             case "Vigenere Cipher":
                 String vigenereCipherKeyString = retrieveString("Enter key: ", true);
-                String[] vigenereCipherOutput = decryptVigenereCipher(ciphertext, vigenereCipherKeyString);
+                String[] vigenereCipherOutput = VigenereCipher.decrypt(ciphertext, vigenereCipherKeyString);
                 System.out.println("\n{Vigenere Cipher}\nCiphertext: "
                         + ciphertext + "\nPlaintext: " + vigenereCipherOutput[0] +
                         "\nKey: " + vigenereCipherOutput[1]);
