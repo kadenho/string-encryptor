@@ -1,18 +1,19 @@
 package kadenho.encryptor;
 
 import org.jetbrains.annotations.NotNull;
+
 import static kadenho.encryptor.CipherUtils.UNSCRAMBLED_ALPHABET;
 
 public class CaesarCipher {
     public static String[] encrypt(String plaintext, int shiftKey) {
         String ciphertext = shiftString(plaintext, shiftKey);
-        return new String[] {ciphertext, Integer.toString(shiftKey)};
+        return new String[]{ciphertext, Integer.toString(shiftKey)};
     }
 
     public static String[] decrypt(String ciphertext, int shiftKey) {
         int offsetShift = UNSCRAMBLED_ALPHABET.length() - shiftKey;
         String plaintext = shiftString(ciphertext, offsetShift);
-        return new String[] {plaintext, Integer.toString(shiftKey)};
+        return new String[]{plaintext, Integer.toString(shiftKey)};
     }
 
     @NotNull
