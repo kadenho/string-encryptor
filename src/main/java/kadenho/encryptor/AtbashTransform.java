@@ -1,13 +1,15 @@
 package kadenho.encryptor;
 
+import static kadenho.encryptor.CipherUtils.UNSCRAMBLED_ALPHABET;
+
 public class AtbashTransform {
 
     public static String encrypt(String plaintext) {
         StringBuilder ciphertextStringBuilder = new StringBuilder();
         for (char character : plaintext.toCharArray()) {
-            int characterIndex = CipherUtils.UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
+            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
             if (characterIndex >= 0) {
-                char scrambledCharacter = CipherUtils.UNSCRAMBLED_ALPHABET.charAt((CipherUtils.UNSCRAMBLED_ALPHABET.length() - 1) - characterIndex);
+                char scrambledCharacter = UNSCRAMBLED_ALPHABET.charAt((UNSCRAMBLED_ALPHABET.length() - 1) - characterIndex);
                 if (Character.isUpperCase(character)) {
                     scrambledCharacter = Character.toUpperCase(scrambledCharacter);
                 }
