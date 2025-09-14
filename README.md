@@ -8,7 +8,7 @@ Development paused as of: 08/09/25
 ## Operation:
 
 ### Running:
-Run the PasswordGenerator.java file \
+Run the StringEncryptor.java file \
 Follow instructions in the terminal
 
 ### Encryption methods:
