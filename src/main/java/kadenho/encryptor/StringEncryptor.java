@@ -107,23 +107,6 @@ public class StringEncryptor {
         return coprimes.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    public static String convertAlphabets(String plaintext, String currentAlphabet, String newAlphabet) {
-        StringBuilder ciphertextStringBuilder = new StringBuilder();
-        for (char character : plaintext.toCharArray()) {
-            int characterIndex = currentAlphabet.indexOf(Character.toLowerCase(character));
-            if (characterIndex >= 0) {
-                char scrambledCharacter = newAlphabet.charAt(characterIndex);
-                if (Character.isUpperCase(character)) {
-                    scrambledCharacter = Character.toUpperCase(scrambledCharacter);
-                }
-                ciphertextStringBuilder.append(scrambledCharacter);
-            } else {
-                ciphertextStringBuilder.append(character);
-            }
-        }
-        return ciphertextStringBuilder.toString();
-    }
-
     private static String encryptPolyAlphabetically(String plaintext, String lengthenedKeyString) {
         int pointer = 0;
         StringBuilder ciphertextStringBuilder = new StringBuilder();
@@ -168,39 +151,7 @@ public class StringEncryptor {
         return plaintextStringBuilder.toString();
     }
 
-    public static String[] encryptMixedAlphabetCipher(String plaintext, String keyString) {
-        StringBuilder scrambledAlphabetStringBuilder = new StringBuilder();
-        for (char character : keyString.toCharArray()) {
-            if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1) {
-                scrambledAlphabetStringBuilder.append(Character.toLowerCase(character));
-            }
-        }
-        for (char character : UNSCRAMBLED_ALPHABET.toCharArray()) {
-            if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1) {
-                scrambledAlphabetStringBuilder.append(Character.toLowerCase(character));
-            }
-        }
-        String scrambledAlphabet = scrambledAlphabetStringBuilder.toString();
-        String ciphertext = convertAlphabets(plaintext, UNSCRAMBLED_ALPHABET, scrambledAlphabet);
-        return new String[]{ciphertext, keyString};
-    }
 
-    public static String[] decryptMixedAlphabetCipher(String ciphertext, String keyString) {
-        StringBuilder scrambledAlphabetStringBuilder = new StringBuilder();
-        for (char character : keyString.toCharArray()) {
-            if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1) {
-                scrambledAlphabetStringBuilder.append(Character.toLowerCase(character));
-            }
-        }
-        for (char character : UNSCRAMBLED_ALPHABET.toCharArray()) {
-            if (scrambledAlphabetStringBuilder.indexOf(String.valueOf(Character.toLowerCase(character))) == -1) {
-                scrambledAlphabetStringBuilder.append(Character.toLowerCase(character));
-            }
-        }
-        String scrambledAlphabet = scrambledAlphabetStringBuilder.toString();
-        String plaintext = convertAlphabets(ciphertext, scrambledAlphabet, UNSCRAMBLED_ALPHABET);
-        return new String[]{plaintext, keyString};
-    }
 
     private static String constructVigenereLengthenedKeyString(String plaintext, String keyString) {
         String filteredPlaintext = plaintext.replaceAll("[^a-zA-Z]", "");
@@ -292,7 +243,7 @@ public class StringEncryptor {
                 break;
             case "Mixed Alphabet Cipher":
                 String mixedAlphabetKeyString = retrieveString("Enter key: ", true);
-                String[] mixedAlphabetCipherOutput = encryptMixedAlphabetCipher(plaintext, mixedAlphabetKeyString);
+                String[] mixedAlphabetCipherOutput = MixedAlphabetCipher.encrypt(plaintext, mixedAlphabetKeyString);
                 System.out.println("\n{Mixed Alphabet Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + mixedAlphabetCipherOutput[0] +
                         "\nKey: " + mixedAlphabetCipherOutput[1]);
@@ -345,7 +296,7 @@ public class StringEncryptor {
                 break;
             case "Mixed Alphabet Cipher":
                 String mixedAlphabetKeyString = retrieveString("Enter key: ", true);
-                String[] mixedAlphabetCipherOutput = decryptMixedAlphabetCipher(ciphertext, mixedAlphabetKeyString);
+                String[] mixedAlphabetCipherOutput = MixedAlphabetCipher.decrypt(ciphertext, mixedAlphabetKeyString);
                 System.out.println("\n{Mixed Alphabet Cipher}\nCiphertext: "
                         + ciphertext + "\nPlaintext: " + mixedAlphabetCipherOutput[0] +
                         "\nKey: " + mixedAlphabetCipherOutput[1]);
