@@ -181,22 +181,7 @@ public class StringEncryptor {
         return plaintextStringBuilder.toString();
     }
 
-    public static String atbashTransform(String plaintext) {
-        StringBuilder ciphertextStringBuilder = new StringBuilder();
-        for (char character : plaintext.toCharArray()) {
-            int characterIndex = UNSCRAMBLED_ALPHABET.indexOf(Character.toLowerCase(character));
-            if (characterIndex >= 0) {
-                char scrambledCharacter = UNSCRAMBLED_ALPHABET.charAt((UNSCRAMBLED_ALPHABET.length() - 1) - characterIndex);
-                if (Character.isUpperCase(character)) {
-                    scrambledCharacter = Character.toUpperCase(scrambledCharacter);
-                }
-                ciphertextStringBuilder.append(scrambledCharacter);
-            } else {
-                ciphertextStringBuilder.append(character);
-            }
-        }
-        return ciphertextStringBuilder.toString();
-    }
+
 
     public static String[] encryptCaesarCipher(String plaintext, int shiftKey) {
         StringBuilder ciphertextStringBuilder = new StringBuilder();
@@ -378,7 +363,7 @@ public class StringEncryptor {
         String chosenEncryptionMethod = retrieveEncryptionMethod();
         switch (chosenEncryptionMethod) {
             case "Atbash Transform":
-                String atbashTransformOutput = atbashTransform(plaintext);
+                String atbashTransformOutput = AtbashTransform.encrypt(plaintext);
                 System.out.println("\n{Atbash Transform}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + atbashTransformOutput);
                 break;
@@ -431,7 +416,7 @@ public class StringEncryptor {
         String chosenEncryptionMethod = retrieveEncryptionMethod();
         switch (chosenEncryptionMethod) {
             case "Atbash Transform":
-                String atbashTransformOutput = atbashTransform(ciphertext);
+                String atbashTransformOutput = AtbashTransform.decrypt(ciphertext);
                 System.out.println("\n{Atbash Transform}\nPlaintext: "
                         + ciphertext + "\nCiphertext: " + atbashTransformOutput);
                 break;

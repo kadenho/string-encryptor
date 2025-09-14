@@ -8,7 +8,7 @@ public class AtbashTransformTest {
     public void lowercaseText() {
         String plaintext = "culvers";
         String expectedOutput = "xfoevih";
-        String actualOutput = StringEncryptor.atbashTransform(plaintext);
+        String actualOutput = AtbashTransform.encrypt(plaintext);
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
@@ -16,7 +16,7 @@ public class AtbashTransformTest {
     public void mixcaseText() {
         String plaintext = "Subway";
         String expectedOutput = "Hfydzb";
-        String actualOutput = StringEncryptor.atbashTransform(plaintext);
+        String actualOutput = AtbashTransform.decrypt(plaintext);
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
@@ -24,7 +24,7 @@ public class AtbashTransformTest {
     public void lowercaseSpacedText() {
         String plaintext = "chick fil a";
         String expectedOutput = "xsrxp uro z";
-        String actualOutput = StringEncryptor.atbashTransform(plaintext);
+        String actualOutput = AtbashTransform.encrypt(plaintext);
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
@@ -32,7 +32,7 @@ public class AtbashTransformTest {
     public void mixcaseSpacedText() {
         String plaintext = "Pizza Hut";
         String expectedOutput = "Kraaz Sfg";
-        String actualOutput = StringEncryptor.atbashTransform(plaintext);
+        String actualOutput = AtbashTransform.decrypt(plaintext);
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
@@ -40,7 +40,7 @@ public class AtbashTransformTest {
     public void lowercaseSpacedMixcharText() {
         String plaintext = "domino's pizza";
         String expectedOutput = "wlnrml'h kraaz";
-        String actualOutput = StringEncryptor.atbashTransform(plaintext);
+        String actualOutput = AtbashTransform.encrypt(plaintext);
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
@@ -48,7 +48,7 @@ public class AtbashTransformTest {
     public void mixcaseSpacedMixcharText() {
         String plaintext = "Raising Cane's.";
         String expectedOutput = "Izrhrmt Xzmv'h.";
-        String actualOutput = StringEncryptor.atbashTransform(plaintext);
+        String actualOutput = AtbashTransform.decrypt(plaintext);
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 }
