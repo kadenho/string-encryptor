@@ -1,12 +1,12 @@
 package kadenho.encryptor;
 
+import static kadenho.encryptor.CipherUtils.UNSCRAMBLED_ALPHABET;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class StringEncryptor {
     public static final Scanner scanner = new Scanner(System.in);
-    public static final String UNSCRAMBLED_ALPHABET = "abcdefghijklmnopqrstuvwxyz";
     public static final String[] AVAILABLE_ENCRYPTION_METHODS = {"Atbash Transform", "Caesar Cipher",
             "Affine Cipher", "Mixed Alphabet Cipher", "Vigenere Cipher", "Autokey Cipher"};
 
@@ -229,11 +229,11 @@ public class StringEncryptor {
             System.out.println();
             main(args);
         } else if (runAgainDecision.equals("Exit")) {
+            scanner.close();
             System.exit(0);
         } else {
             System.out.println("Error: Unable to retrieve decision");
             System.exit(3);
         }
-        scanner.close();
     }
 }
