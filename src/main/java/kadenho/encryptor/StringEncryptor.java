@@ -150,7 +150,7 @@ public class StringEncryptor {
             case "Autokey Cipher":
                 String autokeyCipherKeyString = retrieveString("Enter primer: ", true);
                 String[] autokeyCipherOutput = AutokeyCipher.encrypt(plaintext, autokeyCipherKeyString);
-                System.out.println("\n{Vigenere Cipher}\nPlaintext: "
+                System.out.println("\n{Autokey Cipher}\nPlaintext: "
                         + plaintext + "\nCiphertext: " + autokeyCipherOutput[0] +
                         "\nPrimer: " + autokeyCipherOutput[1]);
                 break;
@@ -203,7 +203,7 @@ public class StringEncryptor {
             case "Autokey Cipher":
                 String autokeyCipherKeyString = retrieveString("Enter primer: ", true);
                 String[] autokeyCipherOutput = AutokeyCipher.decrypt(ciphertext, autokeyCipherKeyString);
-                System.out.println("\n{Vigenere Cipher}\nCiphertext: "
+                System.out.println("\n{Autokey Cipher}\nCiphertext: "
                         + ciphertext + "\nPlaintext: " + autokeyCipherOutput[0] +
                         "\nPrimer: " + autokeyCipherOutput[1]);
                 break;
